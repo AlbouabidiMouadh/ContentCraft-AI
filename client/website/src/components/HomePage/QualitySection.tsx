@@ -5,28 +5,12 @@ const QualitySection = () => {
   return (
     <div
       style={{
-        minHeight: "500px",
+        minHeight: "400px",
         backgroundColor: "white",
         margin: "70px 10% 0",
       }}
     >
-      <div>
-        <div style={{ fontSize: "25px", textAlign: "center" }}>
-          Embraced by global users, our services resonate across borders, <br />
-          making waves worldwide.
-        </div>
-        <div
-          style={{
-            fontSize: "20px",
-            textAlign: "center",
-            color: "#363636",
-            marginTop: "10px",
-          }}
-        >
-          Join our thriving community and experience the power of innovation
-          firsthand.
-        </div>
-      </div>
+      
       <div
         style={{
           display: "flex",

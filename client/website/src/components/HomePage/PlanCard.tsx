@@ -3,26 +3,24 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import Image from "next/image";
 import picture from "@/public/illustrations/Enjoy your finance.png";
 import Link from "next/link";
+import Color from "color";
 const PlanCard = (props: {
   type: string;
   price: number | "Free";
   upgradeLink: string;
-  color: string;
+  color: Color | String | undefined;
   promo: { price: number; limitDate: string } | null;
 }) => {
+  let textColor: Color =
+    Color(props.color).string() == Color("black").string() ? Color("white") : Color("black");
   return (
-    // <div
-    //   style={{
-    //     height: "400px",
-    //     width: "300px",
-    //     border: "solid black 1px",
-    //     borderRadius: "10px",
-    //     backgroundColor: "white",
-    //   }}
-    // >
-
-    // </div>
-    <Card className="py-4" style={{ backgroundColor: props.color }}>
+    <Card
+      className="py-4"
+      style={{
+        backgroundColor: Color(props.color).string(),
+        color: textColor.string(),
+      }}
+    >
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <div style={{ backgroundColor: "white", borderRadius: "10px" }}>
           <Image

@@ -2,7 +2,10 @@ import React from 'react'
 
 const index = () => {
   return (
-    <div>this is the dashboard main page</div>
+    <div>
+      this is the dashboard page
+    </div>
+
   )
 }
 

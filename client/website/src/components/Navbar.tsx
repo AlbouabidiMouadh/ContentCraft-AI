@@ -9,45 +9,53 @@ import { Link } from "@nextui-org/link";
 import { Button } from "@nextui-org/button";
 
 // this is logo needs to be changed to my own website logo or my company logo
-import MyLogo from "./MyLogo";
-
+import Image from "next/image";
+import picture from "@/public/pictures/brain white.png";
 const NavBar = () => {
   return (
     <Navbar
       maxWidth="full"
       className="dark"
       isBlurred={false}
-      position="static"
+      position="sticky"
     >
       <NavbarBrand>
-        <MyLogo />
-        <p className="font-bold text-inherit">MyLogo</p>
+        <Link color="foreground" href="/">
+          <Image
+            src={picture}
+            alt="logo"
+            height={40}
+            width={40}
+            style={{ marginRight: "4px" }}
+          />
+          <p className="font-bold text-inherit">ContentCraft AI</p>
+        </Link>
       </NavbarBrand>
       <NavbarContent className="sm:flex gap-4" justify="center">
+        <NavbarItem>
+          <Link color="foreground" href="/Home">
+            Home
+          </Link>
+        </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="/apps">
             Apps
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/about">
-            About
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/contact">
-            Contact
+          <Link color="foreground" href="/Upgrade">
+            Premium
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="lg:flex">
-          <Link color="primary" href="login">
+          <Link color="primary" href="/auth/login">
             Login
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="signup" variant="flat">
+          <Button as={Link} color="primary" href="/auth/signup" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>

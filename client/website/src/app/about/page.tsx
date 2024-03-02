@@ -1,8 +1,13 @@
+import MainContainer from '@/containers/MainContainer'
 import React from 'react'
 
 const About = () => {
   return (
-    <div>this is the about page</div>
+    <MainContainer>
+      <div style={{height: "60vh"}}>
+
+      </div>
+    </MainContainer>
   )
 }
 
