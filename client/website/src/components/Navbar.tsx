@@ -33,7 +33,7 @@ const NavBar = () => {
       </NavbarBrand>
       <NavbarContent className="sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/Home">
+          <Link color="foreground" href="/">
             Home
           </Link>
         </NavbarItem>

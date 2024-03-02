@@ -3,16 +3,8 @@ import Image from "next/image";
 import React from "react";
 
 import picture from "@/public/illustrations/Char 09.png";
-const appsList = [
-  "item",
-  "item",
-  "item",
-  "item",
-  "item",
-  "item",
-  "item",
-  "item",
-];
+import Link from "next/link";
+const appsList = ["item", "item", "item", "item"];
 const Apps = () => {
   return (
     <MainContainer>
@@ -62,8 +54,8 @@ const Apps = () => {
             return (
               <div
                 style={{
-                  width: "300px",
-                  height: "400px",
+                  width: "250px",
+                  height: "350px",
                   backgroundColor: "black",
                   borderRadius: "30px",
                 }}
@@ -72,9 +64,23 @@ const Apps = () => {
               </div>
             );
           })}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            <div
+              style={{
+                margin: "auto 50px",
+              }}
+            >
+              <Link href="/apps/image-tools">Browse All</Link>
+            </div>
+          </div>
         </div>
       </div>
-
       {/* this is the section of the videos */}
       <div style={{ margin: "100px 10%" }}>
         <h1 style={{ fontSize: "20px" }}>Videos Apps</h1>
@@ -92,8 +98,8 @@ const Apps = () => {
             return (
               <div
                 style={{
-                  width: "300px",
-                  height: "400px",
+                  width: "250px",
+                  height: "350px",
                   backgroundColor: "black",
                   borderRadius: "30px",
                 }}
@@ -102,9 +108,23 @@ const Apps = () => {
               </div>
             );
           })}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            <div
+              style={{
+                margin: "auto 50px",
+              }}
+            >
+              <Link href="/apps/video-tools">Browse All</Link>
+            </div>
+          </div>
         </div>
       </div>
-
       {/* this is the section of the writting */}
       <div style={{ margin: "100px 10%" }}>
         <h1 style={{ fontSize: "20px" }}>writting Apps</h1>
@@ -122,8 +142,8 @@ const Apps = () => {
             return (
               <div
                 style={{
-                  width: "300px",
-                  height: "400px",
+                  width: "250px",
+                  height: "350px",
                   backgroundColor: "black",
                   borderRadius: "30px",
                 }}
@@ -132,12 +152,27 @@ const Apps = () => {
               </div>
             );
           })}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            <div
+              style={{
+                margin: "auto 50px",
+              }}
+            >
+              <Link href="/apps/content-tools">Browse All</Link>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* this is the section of the etc */}
       <div style={{ margin: "100px 10%" }}>
-        <h1 style={{ fontSize: "20px" }}>Other Apps</h1>
+        <h1 style={{ fontSize: "20px" }}>Logo Apps</h1>
         <div
           style={{
             display: "flex",
@@ -152,8 +187,8 @@ const Apps = () => {
             return (
               <div
                 style={{
-                  width: "300px",
-                  height: "400px",
+                  width: "250px",
+                  height: "350px",
                   backgroundColor: "black",
                   borderRadius: "30px",
                 }}
@@ -162,9 +197,23 @@ const Apps = () => {
               </div>
             );
           })}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            <div
+              style={{
+                margin: "auto 50px",
+              }}
+            >
+              <Link href="/apps/logo-tools">Browse All</Link>
+            </div>
+          </div>
         </div>
       </div>
-
     </MainContainer>
   );
 };
