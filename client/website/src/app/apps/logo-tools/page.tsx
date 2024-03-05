@@ -1,8 +1,11 @@
+import MainContainer from '@/containers/MainContainer'
 import React from 'react'
 
 const index = () => {
   return (
-    <div>index</div>
+    <MainContainer>
+      this is the logo apps page
+    </MainContainer>
   )
 }
 

@@ -1,8 +1,13 @@
+import ImageAppsHeader from '@/components/appsPages/ImageAppsHeader'
+import MainContainer from '@/containers/MainContainer'
 import React from 'react'
 
 const index = () => {
   return (
-    <div>index</div>
+    <MainContainer>
+      <ImageAppsHeader/>
+      this is the image apps page
+    </MainContainer>
   )
 }
 
