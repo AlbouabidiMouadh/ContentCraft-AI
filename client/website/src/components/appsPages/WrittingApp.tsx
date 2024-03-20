@@ -2,8 +2,7 @@ import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
-const ImageApp = (props: {
+const WrittingApp = (props: {
   id: string;
   image: string;
   title: string;
@@ -60,4 +59,4 @@ const ImageApp = (props: {
   );
 };
 
-export default ImageApp;
+export default WrittingApp;
