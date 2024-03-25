@@ -2,11 +2,13 @@ import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-const VideoApp = (props: {
+
+const AppCard = (props: {
   id: string;
   image: string;
   title: string;
   url: string;
+  appSectionUrl: string;
   description: string;
 }) => {
   return (
@@ -52,11 +54,11 @@ const VideoApp = (props: {
             justifySelf: "flex-end",
           }}
         >
-          <Link href={`/apps/image-tools/${props.url}`}>Start</Link>
+          <Link href={`/apps/${props.appSectionUrl}/${props.url}`}>Start</Link>
         </Button>
       </div>
     </div>
   );
 };
 
-export default VideoApp;
+export default AppCard;

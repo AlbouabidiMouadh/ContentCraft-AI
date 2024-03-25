@@ -12,7 +12,7 @@ const index = () => {
       image: picture.src,
       title: "app title",
       url: "tool-0",
-      sectionUrl: "video-tools",
+      sectionUrl: "audio-tools",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus quam, fugiat inventore itaque ipsa provident soluta dolorem ab earum facere iusto quo ex fugit expedita sapiente? Quas, tenetur natus? Dolore.",
     },
@@ -21,7 +21,7 @@ const index = () => {
       image: picture.src,
       title: "app title",
       url: "tool-1",
-      sectionUrl: "video-tools",
+      sectionUrl: "audio-tools",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus quam, fugiat inventore itaque ipsa provident soluta dolorem ab earum facere iusto quo ex fugit expedita sapiente? Quas, tenetur natus? Dolore.",
     },
@@ -30,7 +30,7 @@ const index = () => {
       image: picture.src,
       title: "app title",
       url: "tool-2",
-      sectionUrl: "video-tools",
+      sectionUrl: "audio-tools",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus quam, fugiat inventore itaque ipsa provident soluta dolorem ab earum facere iusto quo ex fugit expedita sapiente? Quas, tenetur natus? Dolore.",
     },
@@ -39,7 +39,7 @@ const index = () => {
       image: picture.src,
       title: "app title",
       url: "tool-3",
-      sectionUrl: "video-tools",
+      sectionUrl: "audio-tools",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus quam, fugiat inventore itaque ipsa provident soluta dolorem ab earum facere iusto quo ex fugit expedita sapiente? Quas, tenetur natus? Dolore.",
     },
@@ -47,7 +47,7 @@ const index = () => {
 
   return (
     <MainContainer>
-      <AppPageHeader props={{title: "image", imageUrl: picture2.src}} />
+      <AppPageHeader props={{title: "audio", imageUrl: picture2.src}} />
       {apps.map((item) => {
         return (
           <AppCard

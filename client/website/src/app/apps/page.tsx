@@ -4,7 +4,54 @@ import React from "react";
 
 import picture from "@/public/illustrations/Char 09.png";
 import Link from "next/link";
+import AppHomeSection from "@/components/appsPages/AppHomeSection";
 const appsList = ["item", "item", "item", "item"];
+
+const sections = [
+  {
+    id: 0,
+    title: "Image Apps",
+    url: "image-tools",
+    background: "",
+  },
+  {
+    id: 1,
+    title: "Video Apps",
+    url: "video-tools",
+    background: "",
+  },
+  {
+    id: 2,
+    title: "Audio Apps",
+    url: "audio-tools",
+    background: "",
+  },
+  {
+    id: 3,
+    title: "Content Apps",
+    url: "content-tools",
+    background: "",
+  },
+  {
+    id: 4,
+    title: "Writing Apps",
+    url: "writing-tools",
+    background: "",
+  },
+  {
+    id: 5,
+    title: "Logo Apps",
+    url: "logo-tools",
+    background: "",
+  },
+  {
+    id: 6,
+    title: "Analytics Apps",
+    url: "analytics-tools",
+    background: "",
+  },
+];
+
 const Apps = () => {
   return (
     <MainContainer>
@@ -37,183 +84,9 @@ const Apps = () => {
 
       {/* this is the part of application sections */}
 
-      {/* this is the section of the pictures */}
-      <div style={{ margin: "100px 10%" }}>
-        <h1 style={{ fontSize: "20px" }}>Pictures Apps</h1>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: "40px",
-            justifyContent: "center",
-            marginTop: "50px",
-          }}
-        >
-          {appsList.map(() => {
-            return (
-              <div
-                style={{
-                  width: "250px",
-                  height: "350px",
-                  backgroundColor: "black",
-                  borderRadius: "30px",
-                }}
-              >
-                {/* we put here the card of the app */}
-              </div>
-            );
-          })}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-            }}
-          >
-            <div
-              style={{
-                margin: "auto 50px",
-              }}
-            >
-              <Link href="/apps/image-tools">Browse All</Link>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* this is the section of the videos */}
-      <div style={{ margin: "100px 10%" }}>
-        <h1 style={{ fontSize: "20px" }}>Videos Apps</h1>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: "40px",
-            justifyContent: "center",
-            marginTop: "50px",
-          }}
-        >
-          {appsList.map(() => {
-            return (
-              <div
-                style={{
-                  width: "250px",
-                  height: "350px",
-                  backgroundColor: "black",
-                  borderRadius: "30px",
-                }}
-              >
-                {/* we put here the card of the app */}
-              </div>
-            );
-          })}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-            }}
-          >
-            <div
-              style={{
-                margin: "auto 50px",
-              }}
-            >
-              <Link href="/apps/video-tools">Browse All</Link>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* this is the section of the writting */}
-      <div style={{ margin: "100px 10%" }}>
-        <h1 style={{ fontSize: "20px" }}>writting Apps</h1>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: "40px",
-            justifyContent: "center",
-            marginTop: "50px",
-          }}
-        >
-          {appsList.map(() => {
-            return (
-              <div
-                style={{
-                  width: "250px",
-                  height: "350px",
-                  backgroundColor: "black",
-                  borderRadius: "30px",
-                }}
-              >
-                {/* we put here the card of the app */}
-              </div>
-            );
-          })}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-            }}
-          >
-            <div
-              style={{
-                margin: "auto 50px",
-              }}
-            >
-              <Link href="/apps/content-tools">Browse All</Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* this is the section of the etc */}
-      <div style={{ margin: "100px 10%" }}>
-        <h1 style={{ fontSize: "20px" }}>Logo Apps</h1>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: "40px",
-            justifyContent: "center",
-            marginTop: "50px",
-          }}
-        >
-          {appsList.map(() => {
-            return (
-              <div
-                style={{
-                  width: "250px",
-                  height: "350px",
-                  backgroundColor: "black",
-                  borderRadius: "30px",
-                }}
-              >
-                {/* we put here the card of the app */}
-              </div>
-            );
-          })}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-            }}
-          >
-            <div
-              style={{
-                margin: "auto 50px",
-              }}
-            >
-              <Link href="/apps/logo-tools">Browse All</Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      {sections.map((item) => {
+        return <AppHomeSection section={item} />;
+      })}
     </MainContainer>
   );
 };

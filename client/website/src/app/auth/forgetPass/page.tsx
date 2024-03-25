@@ -34,7 +34,7 @@ const index = () => {
         </Text>
 
         <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
-          <TextInput label="Your email" placeholder="me@mantine.dev" required />
+          <TextInput label="Your email" placeholder="you@email.com" required />
           <Group
             justify="space-between"
             mt="lg"
