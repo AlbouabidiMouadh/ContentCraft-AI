@@ -1,8 +1,11 @@
+import ProfileContainer from '@/containers/ProfileContainer'
 import React from 'react'
 
 const index = () => {
   return (
-    <div>this is the profile settings page</div>
+    <ProfileContainer>
+      this is the profile settings page
+    </ProfileContainer>
   )
 }
 

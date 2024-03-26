@@ -1,8 +1,11 @@
+import ProfileContainer from '@/containers/ProfileContainer'
 import React from 'react'
 
 const index = () => {
   return (
-    <div>this is the profile subscriptions</div>
+    <ProfileContainer>
+      this is the profile subscription page
+    </ProfileContainer>
   )
 }
 
