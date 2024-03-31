@@ -28,7 +28,7 @@ const FeaturedSection = () => {
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "flex-start",
+          justifyContent: "center",
           alignContent: "center",
           flexWrap: "wrap",
           gap: "50px",

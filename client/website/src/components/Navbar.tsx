@@ -43,8 +43,8 @@ const NavBar = () => {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/Upgrade">
-            Premium
+          <Link color="foreground" href="/subscription">
+            Pricing
           </Link>
         </NavbarItem>
       </NavbarContent>

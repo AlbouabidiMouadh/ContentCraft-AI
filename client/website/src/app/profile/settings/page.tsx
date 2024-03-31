@@ -1,10 +1,16 @@
+import ProfileSidenav from '@/components/ProfilePage/ProfileSidenav'
 import ProfileContainer from '@/containers/ProfileContainer'
 import React from 'react'
 
 const index = () => {
   return (
     <ProfileContainer>
-      this is the profile settings page
+      <div style={{ display: "flex" }}>
+      <ProfileSidenav pageName="Security" />
+      <div>
+        this is the settings page
+      </div>
+    </div>
     </ProfileContainer>
   )
 }

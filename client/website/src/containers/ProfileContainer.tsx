@@ -1,17 +1,13 @@
-import ProfileFooter from "@/components/ProfilePage/ProfileFooter";
-import ProfileNavbar from "@/components/ProfilePage/ProfileNavbar";
-import ProfileSidenav from "@/components/ProfilePage/ProfileSidenav";
+import Footer from "@/components/Footer";
+import NavBar from "@/components/Navbar";
 import React from "react";
 
 const ProfileContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <ProfileNavbar />
-      <div style={{ display: "flex" }}>
-        <ProfileSidenav />
-        {children}
-      </div>
-      <ProfileFooter />
+      <NavBar />
+      <div style={{ minHeight: "95vh" }}>{children}</div>
+      <Footer />
     </>
   );
 };
