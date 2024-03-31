@@ -1,11 +1,14 @@
-import ProfileSidenav from "@/components/ProfilePage/ProfileSidenav";
 import ProfileContainer from "@/containers/ProfileContainer";
 import React from "react";
 
 const index = () => {
   return (
     <ProfileContainer>
-      <div>this is the settings page</div>
+      <div style={{ padding: "50px" }}>
+        <div style={{ fontSize: "25px", textAlign: "center", margin: "auto" }}>
+          Welcome User
+        </div>
+      </div>
     </ProfileContainer>
   );
 };

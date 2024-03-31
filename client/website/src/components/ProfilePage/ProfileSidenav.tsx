@@ -7,14 +7,20 @@ import {
   IconLogout,
 } from "@tabler/icons-react";
 
+import type { RootState } from "@/lib/store";
+import { useDispatch, useSelector } from "react-redux";
+import { setPage } from "@/lib/features/profile/profilePageSlice";
+
 const data = [
-  { link: "/profile", label: "General", icon: IconSettings },
+  { link: "/profile/general", label: "General", icon: IconSettings },
   { link: "/profile/settings", label: "Security", icon: IconFingerprint },
   { link: "/profile/subscription", label: "Subscription", icon: IconKey },
 ];
 
-const ProfileSidenav = ({ pageName }: { pageName: string }) => {
-  let active = pageName;
+const ProfileSidenav = () => {
+  const active = useSelector((state: RootState) => state.profilePage.page);
+  const dispatch = useDispatch();
+
   const handleLogOut = () => {};
   const navbarStyle: React.CSSProperties = {
     height: "90vh",
@@ -76,6 +82,11 @@ const ProfileSidenav = ({ pageName }: { pageName: string }) => {
       style={{
         ...linkStyle,
         ...(item.label === active ? linkActiveStyle : null),
+      }}
+      onClick={() => {
+        console.log(active);
+        dispatch(setPage(item.label));
+        console.log(active);
       }}
     >
       <item.icon stroke={1.5} style={linkIconStyle} />
