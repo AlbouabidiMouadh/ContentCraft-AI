@@ -6,9 +6,9 @@ const index = () => {
   return (
     <ProfileContainer>
       <div style={{ display: "flex" }}>
-      <ProfileSidenav pageName="Subscription" />
+      <ProfileSidenav pageName="Security" />
       <div>
-        this is the Subscription page
+        this is the settings page
       </div>
     </div>
     </ProfileContainer>

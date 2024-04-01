@@ -1,14 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import profileSlice from "./features/profile/profileSlice";
 import adminSlice from "./features/admin/adminSlice";
-import profilePageSlice from "./features/profile/profilePageSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       profile: profileSlice,
       admin: adminSlice,
-      profilePage: profilePageSlice,
     },
   });
 };
