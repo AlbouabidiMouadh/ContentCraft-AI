@@ -5,6 +5,8 @@ import "@mantine/core/styles.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
+import { roboto_mono, inter, open_sans, poppins, rubik } from "@/utils/fonts";
+
 export default function RootLayout({
   children,
 }: {
@@ -15,7 +17,7 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body>
+      <body className={poppins.className}>
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <MantineProvider>{children}</MantineProvider>
         </Providers>

@@ -10,6 +10,9 @@ import {
   Button,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import type { Metadata } from "next";
+
+export const metadata = { title: `ContentCraft AI | Contact` } satisfies Metadata;
 
 const index = () => {
   const form = useForm({

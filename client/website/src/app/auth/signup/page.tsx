@@ -14,6 +14,9 @@ import {
 import { GoogleButton } from "@/components/GoogleButton";
 import MainContainer from "@/containers/MainContainer";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata = { title: `ContentCraft AI | Signup` } satisfies Metadata;
 
 const index = () => {
   return (

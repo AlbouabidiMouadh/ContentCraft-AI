@@ -14,6 +14,9 @@ import {
   rem,
 } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";
+import type { Metadata } from "next";
+
+export const metadata = { title: `ContentCraft AI | Forget password` } satisfies Metadata;
 
 const index = () => {
   return (

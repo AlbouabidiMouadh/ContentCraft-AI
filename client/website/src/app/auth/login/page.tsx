@@ -14,6 +14,10 @@ import {
 } from "@mantine/core";
 import { GoogleButton } from "@/components/GoogleButton";
 import MainContainer from "@/containers/MainContainer";
+import type { Metadata } from "next";
+
+export const metadata = { title: `ContentCraft AI | Login` } satisfies Metadata;
+
 const index = () => {
   return (
     <MainContainer>
