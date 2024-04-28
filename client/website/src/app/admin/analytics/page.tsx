@@ -1,4 +1,4 @@
-import AdminSidenavV2 from "@/components/adminPage/AdminSednavV2";
+import AdminSidenavV2 from "@/components/adminPage/AdminSidenavV2";
 import AnalyticsDash from "@/components/adminPage/AnalyticsDash";
 import AdminContainer from "@/containers/AdminContainer";
 import React from "react";

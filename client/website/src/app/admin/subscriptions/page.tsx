@@ -1,4 +1,4 @@
-import AdminSidenavV2 from "@/components/adminPage/AdminSednavV2";
+import AdminSidenavV2 from "@/components/adminPage/AdminSidenavV2";
 import SubscriptionsTable from "@/components/adminPage/SubscriptionsTable";
 import AdminContainer from "@/containers/AdminContainer";
 import React from "react";

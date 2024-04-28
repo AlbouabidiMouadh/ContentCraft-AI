@@ -7,7 +7,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { AccountInfo } from "@/components/adminPage/AccountInfo";
 import { AccountDetailsForm } from "@/components/adminPage/AccountDetailForm";
 import AdminContainer from "@/containers/AdminContainer";
-import AdminSidenavV2 from "@/components/adminPage/AdminSednavV2";
+import AdminSidenavV2 from "@/components/adminPage/AdminSidenavV2";
 
 export const metadata = { title: `Admin | Profile` } satisfies Metadata;
 
