@@ -1,4 +1,12 @@
+"use client";
+import { Code, Group } from "@mantine/core";
 import { Link } from "@nextui-org/link";
+import {
+  IconBrandDatabricks,
+  IconLayoutBoard,
+  IconLogout,
+  IconSettings,
+} from "@tabler/icons-react";
 import React from "react";
 
 type activePageType =
@@ -8,106 +16,107 @@ type activePageType =
   | "services"
   | "subscriptions";
 
+const data = [
+  { link: "/admin", label: "dashboard", icon: IconLayoutBoard },
+  { link: "/admin/profile", label: "profile", icon: IconSettings },
+  { link: "/admin/users", label: "users", icon: IconBrandDatabricks },
+  { link: "/admin/services", label: "services", icon: IconBrandDatabricks },
+  {
+    link: "/admin/subscriptions",
+    label: "subscriptions",
+    icon: IconBrandDatabricks,
+  },
+  { link: "/admin/packs", label: "packs", icon: IconBrandDatabricks },
+];
+
 const AdminSidenavV2 = ({ activePage }: { activePage: activePageType }) => {
-  return (
-    <div
+  let active = activePage;
+  const handleLogOut = () => {};
+  const navbarStyle: React.CSSProperties = {
+    height: "90vh",
+    width: "200px",
+    padding: "var(--mantine-spacing-md)",
+    display: "flex",
+    flexDirection: "column",
+    borderRight:
+      "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
+  };
+
+  const navbarMainStyle: React.CSSProperties = {
+    flex: "1",
+  };
+
+  const headerStyle: React.CSSProperties = {
+    paddingBottom: "var(--mantine-spacing-md)",
+    marginBottom: "calc(var(--mantine-spacing-md) * 1.5)",
+    borderBottom:
+      "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
+  };
+
+  const footerStyle: React.CSSProperties = {
+    paddingTop: "var(--mantine-spacing-md)",
+    marginTop: "var(--mantine-spacing-md)",
+    borderTop:
+      "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
+  };
+
+  const linkStyle: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    textDecoration: "none",
+    fontSize: "var(--mantine-font-size-sm)",
+    color:
+      "light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1))",
+    padding: "var(--mantine-spacing-xs) var(--mantine-spacing-sm)",
+    borderRadius: "var(--mantine-radius-sm)",
+    fontWeight: "500",
+  };
+
+  const linkActiveStyle: React.CSSProperties = {
+    backgroundColor: "var(--mantine-color-blue-light)",
+    color: "var(--mantine-color-blue-light-color)",
+  };
+
+  const linkIconStyle = {
+    color:
+      "light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2))",
+    marginRight: "var(--mantine-spacing-sm)",
+    width: "25px",
+    height: "25px",
+  };
+
+  const links = data.map((item) => (
+    <a
+      key={item.label}
+      href={item.link}
       style={{
-        minWidth: "350px",
-        height: "95vh",
-        borderRight: "solid black 1px",
-        color: "black",
-        backgroundColor: "white",
-        margin: "20px 0",
-        display: "flex",
-        flexDirection: "column",
+        ...linkStyle,
+        ...(item.label === active ? linkActiveStyle : null),
       }}
     >
-      <div
-        style={{
-          fontSize: "20px",
-          padding: "20px",
-          borderBottom: "solid black 1px",
-          marginBottom: "10px",
-        }}
-      >
-        name of the admin
+      <item.icon stroke={1.5} style={linkIconStyle} />
+      <span>{item.label}</span>
+    </a>
+  ));
+
+  return (
+    <nav style={navbarStyle}>
+      <div style={navbarMainStyle}>
+        <Group style={headerStyle} justify="space-between">
+          <Code fw={700} style={{ margin: "auto", fontSize: "18Fpx" }}>
+            Admin Panel
+          </Code>
+        </Group>
+        {links}
       </div>
-      <div
-        style={
-          activePage == "dashboard"
-            ? { fontSize: "18px", backgroundColor: "#c2cbff" }
-            : { fontSize: "18px" }
-        }
-      >
-        <Link
-          color={activePage == "dashboard" ? "primary" : "foreground"}
-          href="/admin/dashboard"
-          style={{ margin: "15px 40px" }}
-        >
-          Dashboard
-        </Link>
+
+      <div style={footerStyle}>
+        <a href="#" onClick={(event) => handleLogOut} style={linkStyle}>
+          <IconLogout style={linkIconStyle} stroke={1.5} />
+          <span>Logout</span>
+        </a>
       </div>
-      <div
-        style={
-          activePage == "users"
-            ? { fontSize: "18px", backgroundColor: "#c2cbff" }
-            : { fontSize: "18px" }
-        }
-      >
-        <Link
-          color={activePage == "users" ? "primary" : "foreground"}
-          href="/admin/users"
-          style={{ margin: "15px 40px" }}
-        >
-          Users
-        </Link>
-      </div>
-      <div
-        style={
-          activePage == "services"
-            ? { fontSize: "18px", backgroundColor: "#c2cbff" }
-            : { fontSize: "18px" }
-        }
-      >
-        <Link
-          color={activePage == "services" ? "primary" : "foreground"}
-          href="/admin/services"
-          style={{ margin: "15px 40px" }}
-        >
-          Services
-        </Link>
-      </div>
-      <div
-        style={
-          activePage == "subscriptions"
-            ? { fontSize: "18px", backgroundColor: "#c2cbff" }
-            : { fontSize: "18px" }
-        }
-      >
-        <Link
-          color={activePage == "subscriptions" ? "primary" : "foreground"}
-          href="/admin/subscriptions"
-          style={{ margin: "15px 40px" }}
-        >
-          Subscriptions
-        </Link>
-      </div>
-      <div
-        style={
-          activePage == "profile"
-            ? { fontSize: "18px", backgroundColor: "#c2cbff" }
-            : { fontSize: "18px" }
-        }
-      >
-        <Link
-          color={activePage == "profile" ? "primary" : "foreground"}
-          href="/admin"
-          style={{ margin: "15px 40px" }}
-        >
-          Profile
-        </Link>
-      </div>
-    </div>
+    </nav>
   );
 };
 

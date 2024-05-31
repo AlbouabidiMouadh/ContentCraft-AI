@@ -20,7 +20,7 @@ const appsFetcher = () => {
 const FreeSection = () => {
   return (
     <div style={{ margin: "20px 10%", width: "80%" }}>
-      <div style={{ fontSize: "25px" }}>Free AI applications</div>
+      <div style={{ fontSize: "28px" }}>Free AI applications</div>
       <div style={{ fontSize: "15px", marginBottom: "30px" }}>
         Explore free AI applications
       </div>

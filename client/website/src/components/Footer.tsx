@@ -41,16 +41,20 @@ const Footer = () => {
               fontWeight: "bolder",
             }}
           >
-            About
+            Services
           </div>
-          <Link href="/about">
-            <div style={{ color: "gray" }}>About</div>
+          <Link href="/apps/image-tools">
+            <div style={{ color: "gray" }}>Images</div>
           </Link>
-          <Link href="/contact">
-            <div style={{ color: "gray" }}>Contact</div>
+          <Link href="/apps/video-tools">
+            <div style={{ color: "gray" }}>Videos</div>
           </Link>
-          <div style={{ color: "gray" }}>element 3</div>
-          <div style={{ color: "gray" }}>element 4</div>
+          <Link href="/apps/writing-tools">
+            <div style={{ color: "gray" }}>Text</div>
+          </Link>
+          <Link href="/apps/audio-tools">
+            <div style={{ color: "gray" }}>Audio</div>
+          </Link>
         </div>
         <div style={{ maxWidth: "20%" }}>
           <div
@@ -62,10 +66,18 @@ const Footer = () => {
           >
             Project
           </div>
-          <div style={{ color: "gray" }}>element 1</div>
-          <div style={{ color: "gray" }}>element 2</div>
-          <div style={{ color: "gray" }}>element 3</div>
-          <div style={{ color: "gray" }}>element 4</div>
+          <Link href="/coming-soon">
+            <div style={{ color: "gray" }}>APIs</div>
+          </Link>
+          <Link href="/coming-soon">
+            <div style={{ color: "gray" }}>Developers</div>
+          </Link>
+          <Link href="/coming-soon">
+            <div style={{ color: "gray" }}>Github</div>
+          </Link>
+          <Link href="/coming-soon">
+            <div style={{ color: "gray" }}>Open Source</div>
+          </Link>
         </div>
         <div style={{ maxWidth: "20%" }}>
           <div
@@ -77,10 +89,18 @@ const Footer = () => {
           >
             Community
           </div>
-          <div style={{ color: "gray" }}>element 1</div>
-          <div style={{ color: "gray" }}>element 2</div>
-          <div style={{ color: "gray" }}>element 3</div>
-          <div style={{ color: "gray" }}>element 4</div>
+          <Link href="/about">
+            <div style={{ color: "gray" }}>About</div>
+          </Link>
+          <Link href="/contact">
+            <div style={{ color: "gray" }}>Contact Us</div>
+          </Link>
+          {/* <Link href="/">
+            <div style={{ color: "gray" }}></div>
+          </Link>
+          <Link href="/">
+            <div style={{ color: "gray" }}>element 4</div>
+          </Link> */}
         </div>
       </div>
       <hr />

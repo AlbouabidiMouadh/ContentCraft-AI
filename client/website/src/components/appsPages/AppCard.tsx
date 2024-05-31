@@ -1,61 +1,48 @@
+import { ServiceType } from "@/types/service";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
- 
-const AppCard = (props: {
-  id: string;
-  image: string;
-  title: string;
-  url: string;
-  appSectionUrl: string;
-  description: string;
-}) => {
+
+const AppCard = ({ app }: { app: ServiceType }) => {
   return (
     <div
       style={{
-        minHeight: "400px",
-        margin: "0 15%",
-        padding: "50px 0",
+        maxWidth: "70%",
+        margin: "20px auto",
+        padding: "20px",
         display: "flex",
         flexDirection: "row",
-        alignContent: "center",
+        alignItems: "center",
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+        borderRadius: "8px",
+        backgroundColor: "#ffffff",
+        transition: "transform 0.3s ease",
       }}
     >
-      <Image
-        src={props.image}
-        height={350}
-        width={350}
-        alt={`${props.title}-image`}
-      />
-      <div
-        style={{
-          marginLeft: "50px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "25px",
-            textAlign: "center",
-            marginBottom: "30px",
-          }}
-        >
-          {props.title}
-        </h1>
-        <p>{props.description}</p>
-        <Button
-          // href={props.url}
-          color="primary"
-          style={{
-            margin: "auto",
-            justifySelf: "flex-end",
-          }}
-        >
-          <Link href={`/apps/${props.appSectionUrl}/${props.url}`}>Start</Link>
-        </Button>
+      <div style={{ marginRight: "20px", flex: "1" }}>
+        <Image
+          src={app.picture}
+          height={250}
+          width={250}
+          alt={`${app.name}-image`}
+          style={{ borderRadius: "8px" }}
+        />
+      </div>
+      <div style={{ flex: "2" }}>
+        <div>
+          <h2 style={{ fontSize: "24px", fontWeight: 600, marginBottom: "10px" }}>
+            {app.name}
+          </h2>
+          <p style={{ fontSize: "16px", color: "#6B7280", marginBottom: "20px" }}>
+            {app.description}
+          </p>
+          <Link href={`/apps/${app.sectionName}/${app.url}`} passHref>
+            <Button color="primary" variant="solid" size="lg">
+              Explore
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

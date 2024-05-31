@@ -20,7 +20,7 @@ const appsFetcher = () => {
 const FeaturedSection = () => {
   return (
     <div style={{ margin: "50px 10%" }}>
-      <div style={{ fontSize: "25px" }}>Featured AI applications</div>
+      <div  style={{ fontSize: "28px"}}>Featured AI applications</div>
       <div style={{ fontSize: "15px", marginBottom: "30px" }}>
         AI applications and services with unique features
       </div>

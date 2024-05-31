@@ -1,5 +1,6 @@
+import Image from "next/image";
 import React from "react";
-
+import logo from "@/public/pictures/brain white.png";
 const AdminHeader = () => {
   return (
     <div
@@ -14,9 +15,9 @@ const AdminHeader = () => {
         padding: "5px 20px",
       }}
     >
-      <div>logo</div>
+      <Image src={logo.src} alt="logo-image" width={30} height={30} />
       <div>Admin Dashboard</div>
-      <div>options | Account | Logout</div>
+      <div>Logout</div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ const CustomersThoughtsSection = () => {
   return (
     <div style={{ margin: "100px 10% 100px" }}>
       <div>
-        <div style={{ fontSize: "25px", textAlign: "center" }}>
+        <div style={{ textAlign: "center", fontSize: "28px" }}>
           Embraced by global users, our services resonate across borders, <br />
           making waves worldwide.
         </div>

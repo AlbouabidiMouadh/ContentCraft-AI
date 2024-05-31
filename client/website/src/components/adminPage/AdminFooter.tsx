@@ -11,8 +11,7 @@ const AdminFooter = () => {
         backgroundColor: "black",
       }}
     >
-      <div>All rights reserved ContentCraft 2024</div>
-      <div>Developped by SynapseTech {"<"}3</div>
+      <div>All rights reserved ContentCraft AI 2024</div>
     </div>
   );
 };

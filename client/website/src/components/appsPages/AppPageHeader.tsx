@@ -1,41 +1,37 @@
 import React from "react";
-import picture from "@/public/illustrations/Char 11.png";
-import { Image } from "@mantine/core";
+import { Container, Grid, Text } from "@mantine/core";
+
 const defaultProps = {
   title: "title",
-  imageUrl: picture.src,
+  description: "description", // Default description
+  imageUrl: "/illustrations/Char11.png", // Adjust the image URL path as per your project structure
 };
-type StaticImageData = {
-  src: string;
-  height: number;
-  width: number;
-  blurDataURL?: string;
-};
-const AppPageHeader = ({
-  props = defaultProps,
-}: {
-  props: {
-    title?: string;
-    imageUrl?: string | StaticImageData;
-  };
-}) => {
+
+const AppPageHeader = ({ props = defaultProps }) => {
   return (
-    <div
-      style={{
-        height: "300px",
-        backgroundColor: "black",
-        color: "white",
-        padding: "50px 15%",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        flexWrap: "wrap",
-        alignContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Image src={props.imageUrl} alt="image-tools-header" h={250} />
-      <div>Discover all {props.title} apps and tools</div>
+    <div style={{ padding: "50px 15%", backgroundColor: "black" }}>
+      <Grid justify="space-evenly" align="center">
+        <div style={{ marginBottom: "30px", textAlign: "center" }}>
+          <img
+            src={props.imageUrl}
+            alt="image-tools-header"
+            width={250}
+            height={250}
+            style={{ borderRadius: "12px" }}
+          />
+        </div>
+        <div>
+          <Text
+            size="xl"
+            style={{ color: "white", fontWeight: 700, textAlign: "center" }}
+          >
+            Discover all {props.title} apps and tools
+          </Text>
+          <Text size="lg" style={{ color: "white", textAlign: "center" }}>
+            {props.description}
+          </Text>
+        </div>
+      </Grid>
     </div>
   );
 };

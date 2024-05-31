@@ -1,27 +1,29 @@
-import Image from "next/image";
 import React from "react";
 import illustration from "@/public/illustrations/Char 01.png";
+import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Image } from "@nextui-org/react";
 // this needs to get modified in desing and functions and adding the card props
 const FeaturedCard = () => {
   return (
-    <div
-      style={{
-        border: "solid black 1px",
-        borderRadius: "10px",
-        // backgroundColor: "gray",
-        height: "300px",
-        width: "250px",
-      }}
+    <Card
+      className="py-4"
+      shadow="sm"
+      style={{ backgroundColor: "black", color: "#fff" }}
     >
-      <Image src={illustration} alt="card picture" height={250} />
-      <div>this is the type of the card</div>
-      <div style={{height: "50px"}}>
-        <div style={{textAlign: "center"}}>
-        this is the title of the card
-        </div>
-
-      </div>
-    </div>
+      <CardHeader className="h-[300px] pb-0 pt-2 px-4 flex-col items-start bg-dark text-white">
+        <Image
+          alt="Card background"
+          className="object-cover rounded-xl "
+          src="https://images.unsplash.com/photo-1516410290616-fb59b7994a51?q=80&w=1086&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          width={220}
+        />
+      </CardHeader>
+      <CardBody className="overflow-visible py-2 bg-dark text-white">
+        <p className="text-tiny uppercase font-bold">Section Name</p>
+        <small className="text-default-500">pack type</small>
+        <h4 className="font-bold text-large">Service Name</h4>
+      </CardBody>
+    </Card>
   );
 };
 

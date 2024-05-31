@@ -1,49 +1,85 @@
 import React from "react";
-import picture from "@/public/illustrations/Char 05.png";
 import Image from "next/image";
+import picture from "@/public/illustrations/Char 05.png";
+
 const QualitySection = () => {
+  const sections = [
+    // {
+    //   title: "AI-Powered Services",
+    //   text: "Discover our range of AI-powered services designed to streamline your content creation process. From automated writing assistants to intelligent video editing tools, we offer solutions that save you time and enhance your productivity.",
+    // },
+    // {
+    //   title: "Quality and Speed",
+    //   text: "Experience the perfect balance of quality and speed with our AI tools. Our technology ensures high-quality outputs while significantly reducing the time required to produce top-notch content, helping you stay ahead of your deadlines.",
+    // },
+    // {
+    //   title: "Upcoming Features",
+    //   text: "Stay tuned for our upcoming services! We are constantly innovating and adding new features to enhance your content creation experience. Our future updates will include advanced AI capabilities to keep you at the cutting edge of content technology.",
+    // },
+    {
+      title: "AI Services",
+      text: "Streamline your content creation with our AI-powered tools.",
+    },
+    {
+      title: "Quality & Speed",
+      text: "Achieve high-quality results quickly with our AI technology.",
+    },
+    {
+      title: "Upcoming Features",
+      text: "Stay tuned for new features and updates.",
+    },
+  ];
+
   return (
-    <div
-      style={{
-        minHeight: "400px",
-        backgroundColor: "white",
-        margin: "70px 10% 0",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "80px 0",
-          flexWrap: "wrap",
-          rowGap: "50px",
-          gap: "50px"
-        }}
-      >
-        <div style={{ width: "300px", height: "300px" }}>
-          <Image src={picture} height={250} width={250} alt="picture" />
-          <div style={{ fontSize: "20px", marginTop: "30px" }}>
-            {" "}
-            this is for the Services that the website provides{" "}
+    <div style={styles.container}>
+      <div style={styles.content}>
+        {sections.map((section, index) => (
+          <div key={index} style={styles.item}>
+            <Image src={picture} height={250} width={250} alt={`Illustration ${index + 1}`} />
+            <div style={styles.text}>
+              <h3 style={styles.title}>{section.title}</h3>
+              <p>{section.text}</p>
+            </div>
           </div>
-        </div>
-        <div style={{ width: "300px", height: "300px" }}>
-          <Image src={picture} height={250} width={250} alt="picture" />
-          <div style={{ fontSize: "20px", marginTop: "30px" }}>
-            this is for the quality of the resources and could be for the speed
-          </div>
-        </div>
-        <div style={{ width: "300px", height: "300px" }}>
-          <Image src={picture} height={250} width={250} alt="picture" />
-          <div style={{ fontSize: "20px", marginTop: "30px" }}>
-            this is for the more coming service to talk about them
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    minHeight: "400px",
+    backgroundColor: "white",
+    margin: "70px 10% 0",
+  },
+  content: {
+    display: "flex",
+    flexDirection: "row" as "row",
+    justifyContent: "center" as "center",
+    alignItems: "center" as "center",
+    margin: "80px 0",
+    flexWrap: "wrap" as "wrap",
+    rowGap: "100px",
+    gap: "50px",
+  },
+  item: {
+    width: "300px",
+    height: "auto",
+    display: "flex",
+    flexDirection: "column" as "column",
+    alignItems: "center" as "center",
+    textAlign: "center" as "center",
+  },
+  text: {
+    fontSize: "16px",
+    marginTop: "20px",
+  },
+  title: {
+    fontSize: "20px",
+    fontWeight: "bold",
+    marginBottom: "10px",
+  },
 };
 
 export default QualitySection;

@@ -1,13 +1,10 @@
 import { Providers } from "./providers";
 import "@/app/globals.css";
-
 import "@mantine/core/styles.css";
-
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-
 import { roboto_mono, inter, open_sans, poppins, rubik } from "@/utils/fonts";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;

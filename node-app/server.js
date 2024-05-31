@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 require("dotenv").config();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 const mongo_uri = process.env.MONGO_URI;
 
 // routers call
@@ -14,12 +16,16 @@ const applicationRouter = require("./routers/v1/applicationRouter");
 const subscriptionRouter = require("./routers/v1/subscriptionRouter");
 const fileUploadRouter = require("./routers/v1/fileUploadRouter");
 
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static("public"));
+app.use(express.json());
+app.use(cors());
+
 // Connect to MongoDB
 mongoose
-  .connect(
-    mongo_uri,
-    {}
-  )
+  .connect(mongo_uri, {})
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -42,6 +48,6 @@ app.get("/", (req, res) => {
   console.log("hello from the root endpoint");
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log(`started listening on ${port}`);
 });

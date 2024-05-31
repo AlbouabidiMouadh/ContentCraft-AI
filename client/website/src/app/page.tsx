@@ -8,7 +8,9 @@ import QualitySection from "@/components/HomePage/QualitySection";
 import MainContainer from "@/containers/MainContainer";
 import type { Metadata } from "next";
 
-export const metadata = { title: `ContentCraft AI | Home` } satisfies Metadata;
+export const metadata = {
+  title: `ContentCraft AI | Home`,
+} satisfies Metadata;
 
 export default function Home() {
   return (

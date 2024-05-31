@@ -6,7 +6,9 @@ import {
   IconSettings,
   IconLogout,
 } from "@tabler/icons-react";
-
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const data = [
   { link: "/profile/general", label: "General", icon: IconSettings },
@@ -15,8 +17,44 @@ const data = [
 ];
 
 const ProfileSidenav = ({ pageName }: { pageName: string }) => {
+  type userType = {
+    name: string;
+    email: string;
+    picture: string;
+    subscription: string;
+    id: string;
+  };
+  const router = useRouter();
+  const [user, setUser] = useState<userType>({
+    name: "",
+    email: "",
+    picture: "",
+    subscription: "",
+    id: "",
+  });
+  useEffect(() => {
+    let userData = Cookies.get("session");
+    if (typeof userData != "string") {
+      router.push("/auth/user/login");
+    }
+    let userD: userType =
+      typeof userData == "string" && userData.length > 0
+        ? JSON.parse(userData).user
+        : {
+            name: "",
+            email: "",
+            picture: "",
+            subscription: "",
+            id: "",
+          };
+    setUser(userD);
+  }, []);
+
   let active = pageName;
-  const handleLogOut = () => {};
+  const handleLogOut = () => {
+    Cookies.remove("session");
+    router.push("/");
+  };
   const navbarStyle: React.CSSProperties = {
     height: "90vh",
     width: "300px",
@@ -88,7 +126,7 @@ const ProfileSidenav = ({ pageName }: { pageName: string }) => {
     <nav style={navbarStyle}>
       <div style={navbarMainStyle}>
         <Group style={headerStyle} justify="space-between">
-          <Code fw={700}>User name with picture</Code>
+          <Code fw={700}>{user.name}</Code>
         </Group>
         {links}
       </div>

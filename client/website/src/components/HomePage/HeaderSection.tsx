@@ -1,23 +1,53 @@
+"use client";
+
 import React from "react";
 import colors from "@/utils/colors";
+import { 
+  IconStar, 
+  IconRocket, 
+  IconPalette, 
+  IconCamera, 
+  IconVideo,
+  IconMusic,
+  IconBook,
+  IconMessageCircle
+} from "@tabler/icons-react";
 import { Button } from "@nextui-org/button";
 
-// this section needs more design and logic
+const premiumButtonHandler = () => {
+  console.log("Premium button clicked");
+};
 
-const premiumButtonHandler = () => {};
-const freeButtonHandler = () => {};
+const freeButtonHandler = () => {
+  console.log("Free button clicked");
+};
+
 const Header = () => {
   return (
     <div
       style={{
         marginTop: "-20px",
         backgroundColor: "black",
+        paddingTop: "20px"
       }}
     >
       <div
-        style={{ textAlign: "center", margin: "20px 15% 0", padding: "20px" }}
+        style={{ 
+          textAlign: "center", 
+          margin: "20px 15% 5px", 
+          // padding: "10px", 
+          display: "flex", 
+          justifyContent: "center", 
+          gap: "10px" 
+        }}
       >
-        this is the place of the symbols
+        {/* <IconStar size={20} style={{ color: "white" }} />
+        <IconRocket size={20} style={{ color: "white" }} />
+        <IconCamera size={20} style={{ color: "white" }} />
+        <IconVideo size={20} style={{ color: "white" }} />
+        <IconMusic size={20} style={{ color: "white" }} />
+        <IconBook size={20} style={{ color: "white" }} />
+        <IconMessageCircle size={20} style={{ color: "white" }} /> */}
       </div>
       <div
         style={{
@@ -62,10 +92,10 @@ const Header = () => {
           paddingBottom: "30px",
         }}
       >
-        <Button size="lg" color="primary" variant="shadow">
+        <Button size="lg" color="primary" variant="shadow" onClick={premiumButtonHandler}>
           Premium
         </Button>
-        <Button size="lg" color="primary" variant="ghost">
+        <Button size="lg" color="primary" variant="ghost" onClick={freeButtonHandler}>
           Free
         </Button>
       </div>
