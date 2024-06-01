@@ -1,12 +1,11 @@
 const { Schema, model } = require("mongoose");
 
-const applicationSchema = new Schema({
+const sectionSchema = new Schema({
   name: String,
   description: String,
   picture: String,
-  reviews: [{ likes: Number, review: String }],
   url: String,
   appsIds: [String],
 });
 
-module.exports = model("Application", applicationSchema);
+module.exports = model("Section", sectionSchema);

@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const passport = require("passport");
+const userPassportConfig = require("./config/user-passport-config");
+const adminPassportConfig = require("./config/admin-passport-config");
 const app = express();
 require("dotenv").config();
 const port = process.env.PORT || 4000;
@@ -14,6 +17,7 @@ const appleAuthRouter = require("./routers/v1/appleAuthRouter");
 const googleAuthRouter = require("./routers/v1/googleAuthRouter");
 const applicationRouter = require("./routers/v1/applicationRouter");
 const subscriptionRouter = require("./routers/v1/subscriptionRouter");
+const sectionRouter = require("./routers/v1/sectionRouter");
 const fileUploadRouter = require("./routers/v1/fileUploadRouter");
 
 // Middleware
@@ -22,6 +26,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
+// Initialize Passport for both user and admin
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Use user and admin Passport configurations
+passport.use(userPassportConfig);
+passport.use(adminPassportConfig);
 
 // Connect to MongoDB
 mongoose
@@ -40,6 +51,7 @@ app.use("/api", applicationRouter);
 app.use("/api", fileUploadRouter);
 app.use("/api", googleAuthRouter);
 app.use("/api", subscriptionRouter);
+app.use("/api", sectionRouter);
 app.use("/api", userRouter);
 
 app.get("/", (req, res) => {

@@ -7,24 +7,46 @@ export const metadata = {
   title: `ContentCraft AI | Coming Soon`,
 } satisfies Metadata;
 
-const page = () => {
+const ComingSoonPage = () => {
   return (
     <MainContainer>
       <div
         style={{
           backgroundColor: "black",
-          height: "90vh",
+          height: "100vh",
           width: "100%",
-          paddingTop: "40vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           color: "white",
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: "25px" }}>Coming Soon ...</div>
-        <Link href="/">Go Back to home</Link>
+        <div
+          style={{
+            fontSize: "32px",
+            fontWeight: "bold",
+            marginBottom: "20px",
+          }}
+        >
+          Coming Soon ...
+        </div>
+        <Link href="/" legacyBehavior>
+          <a
+            style={{
+              color: "gray",
+              fontSize: "18px",
+              textDecoration: "none",
+              transition: "color 0.3s ease",
+            }}
+          >
+            Go Back to Home
+          </a>
+        </Link>
       </div>
     </MainContainer>
   );
 };
 
-export default page;
+export default ComingSoonPage;

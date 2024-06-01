@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography } from "@mui/material";
 
 const AdminFooter = () => {
   return (
@@ -6,12 +7,18 @@ const AdminFooter = () => {
       style={{
         fontSize: "15px",
         textAlign: "center",
-        padding: "10px",
-        color: "white",
-        backgroundColor: "black",
+        padding: "20px",
+        color: "#ffffff",
+        background: "linear-gradient(90deg, #000000, #434343)",
+        position: "fixed",
+        bottom: 0,
+        width: "100%",
+        boxShadow: "0 -1px 5px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <div>All rights reserved ContentCraft AI 2024</div>
+      <Typography variant="body2">
+        © 2024 ContentCraft AI. All rights reserved.
+      </Typography>
     </div>
   );
 };

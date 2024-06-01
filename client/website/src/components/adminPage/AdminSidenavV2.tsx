@@ -1,6 +1,6 @@
 "use client";
 import { Code, Group } from "@mantine/core";
-import { Link } from "@nextui-org/link";
+import Link from "next/link";
 import {
   IconBrandDatabricks,
   IconLayoutBoard,
@@ -9,113 +9,114 @@ import {
 } from "@tabler/icons-react";
 import React from "react";
 
-type activePageType =
+type ActivePageType =
   | "users"
   | "profile"
   | "dashboard"
   | "services"
-  | "subscriptions";
+  | "subscriptions"
+  | "packs";
 
 const data = [
-  { link: "/admin", label: "dashboard", icon: IconLayoutBoard },
-  { link: "/admin/profile", label: "profile", icon: IconSettings },
-  { link: "/admin/users", label: "users", icon: IconBrandDatabricks },
-  { link: "/admin/services", label: "services", icon: IconBrandDatabricks },
+  { link: "/admin", label: "Dashboard", icon: IconLayoutBoard },
+  { link: "/admin/profile", label: "Profile", icon: IconSettings },
+  { link: "/admin/users", label: "Users", icon: IconBrandDatabricks },
+  { link: "/admin/services", label: "Services", icon: IconBrandDatabricks },
   {
     link: "/admin/subscriptions",
-    label: "subscriptions",
+    label: "Subscriptions",
     icon: IconBrandDatabricks,
   },
-  { link: "/admin/packs", label: "packs", icon: IconBrandDatabricks },
+  { link: "/admin/packs", label: "Packs", icon: IconBrandDatabricks },
 ];
 
-const AdminSidenavV2 = ({ activePage }: { activePage: activePageType }) => {
-  let active = activePage;
-  const handleLogOut = () => {};
+const AdminSidenavV2 = ({
+  activePage,
+  handleLogOut,
+}: {
+  activePage: ActivePageType;
+  handleLogOut: () => void;
+}) => {
   const navbarStyle: React.CSSProperties = {
-    height: "90vh",
-    width: "200px",
-    padding: "var(--mantine-spacing-md)",
+    height: "100vh",
+    width: "250px",
+    padding: "20px",
     display: "flex",
     flexDirection: "column",
-    borderRight:
-      "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
-  };
-
-  const navbarMainStyle: React.CSSProperties = {
-    flex: "1",
+    borderRight: "1px solid #ccc",
+    backgroundColor: "#1a1a1a",
+    color: "white",
   };
 
   const headerStyle: React.CSSProperties = {
-    paddingBottom: "var(--mantine-spacing-md)",
-    marginBottom: "calc(var(--mantine-spacing-md) * 1.5)",
-    borderBottom:
-      "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
+    paddingBottom: "20px",
+    marginBottom: "20px",
+    borderBottom: "1px solid #ccc",
   };
 
   const footerStyle: React.CSSProperties = {
-    paddingTop: "var(--mantine-spacing-md)",
-    marginTop: "var(--mantine-spacing-md)",
-    borderTop:
-      "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
+    paddingTop: "20px",
+    borderTop: "1px solid #ccc",
   };
 
   const linkStyle: React.CSSProperties = {
     display: "flex",
     alignItems: "center",
     textDecoration: "none",
-    fontSize: "var(--mantine-font-size-sm)",
-    color:
-      "light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1))",
-    padding: "var(--mantine-spacing-xs) var(--mantine-spacing-sm)",
-    borderRadius: "var(--mantine-radius-sm)",
-    fontWeight: "500",
+    fontSize: "16px",
+    color: "#ccc",
+    padding: "10px",
+    borderRadius: "8px",
+    marginBottom: "10px",
+    transition: "background-color 0.3s",
   };
 
   const linkActiveStyle: React.CSSProperties = {
-    backgroundColor: "var(--mantine-color-blue-light)",
-    color: "var(--mantine-color-blue-light-color)",
+    backgroundColor: "#333",
+    color: "#fff",
   };
 
-  const linkIconStyle = {
-    color:
-      "light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2))",
-    marginRight: "var(--mantine-spacing-sm)",
-    width: "25px",
-    height: "25px",
+  const linkIconStyle: React.CSSProperties = {
+    marginRight: "10px",
+    width: "20px",
+    height: "20px",
   };
 
   const links = data.map((item) => (
-    <a
-      key={item.label}
-      href={item.link}
-      style={{
-        ...linkStyle,
-        ...(item.label === active ? linkActiveStyle : null),
-      }}
-    >
-      <item.icon stroke={1.5} style={linkIconStyle} />
-      <span>{item.label}</span>
-    </a>
+    <Link key={item.label} href={item.link} passHref>
+      <a
+        style={{
+          ...linkStyle,
+          ...(item.label.toLowerCase() === activePage ? linkActiveStyle : null),
+        }}
+      >
+        <item.icon stroke={1.5} style={linkIconStyle} />
+        <span>{item.label}</span>
+      </a>
+    </Link>
   ));
 
   return (
     <nav style={navbarStyle}>
-      <div style={navbarMainStyle}>
-        <Group style={headerStyle} justify="space-between">
-          <Code fw={700} style={{ margin: "auto", fontSize: "18Fpx" }}>
-            Admin Panel
-          </Code>
-        </Group>
-        {links}
-      </div>
-
-      <div style={footerStyle}>
-        <a href="#" onClick={(event) => handleLogOut} style={linkStyle}>
+      <Group style={headerStyle}>
+        <Code fw={700} style={{ fontSize: "24px" }}>
+          Admin Panel
+        </Code>
+      </Group>
+      {links}
+      <Group style={footerStyle}>
+        <a
+          href="#"
+          onClick={(event) => {
+            event.preventDefault();
+            handleLogOut();
+          }}
+          style={linkStyle}
+        >
           <IconLogout style={linkIconStyle} stroke={1.5} />
           <span>Logout</span>
         </a>
-      </div>
+      </Group>
     </nav>
   );
 };

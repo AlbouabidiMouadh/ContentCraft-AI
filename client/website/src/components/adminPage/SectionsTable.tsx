@@ -5,42 +5,33 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import TablePagination from "@mui/material/TablePagination";
 import axios from "axios";
 
-interface Application {
-  name: string;
-  description: string;
-  features: string[];
-  picture: string;
-  reviews: { stars: number; review: string; user: string; userId: string }[];
-  url: string;
-  inputType: string;
-  outputType: string;
-  sectionId: string;
-  sectionName: string;
-  pack: string;
-}
-
 interface Column {
-  id: keyof Application;
+  id: keyof SectionModel;
   label: string;
-  minWidth?: number;
+  minWidth: number;
   align?: "right";
 }
 
-const columns: readonly Column[] = [
+const columns: Column[] = [
   { id: "name", label: "Name", minWidth: 170 },
   { id: "description", label: "Description", minWidth: 170 },
   { id: "url", label: "URL", minWidth: 170 },
-  // Add more columns as needed
 ];
 
-export default function ServicesTable() {
-  const [data, setData] = React.useState<Application[]>([]);
+interface SectionModel {
+  name: string;
+  description: string;
+  url: string;
+}
+
+export default function SectionsTable() {
+  const [data, setData] = React.useState<SectionModel[]>([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(30);
+  const [rowsPerPage, setRowsPerPage] = React.useState(15);
 
   React.useEffect(() => {
     fetchData();
@@ -48,7 +39,7 @@ export default function ServicesTable() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<Application[]>("/api/applications");
+      const response = await axios.get("/api/sections");
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -70,16 +61,19 @@ export default function ServicesTable() {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper>
       <TableContainer>
-        <Table stickyHeader aria-label="sticky table">
+        <Table style={{ minWidth: 650 }} aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align || "left"}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    fontWeight: "bold",
+                  }}
                 >
                   {column.label}
                 </TableCell>
@@ -89,20 +83,11 @@ export default function ServicesTable() {
           <TableBody>
             {data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((application, index) => (
-                <TableRow key={index} hover role="checkbox" tabIndex={-1}>
+              .map((section, index) => (
+                <TableRow key={index} hover tabIndex={-1}>
                   {columns.map((column) => (
                     <TableCell key={column.id} align={column.align || "left"}>
-                      {column.id === "reviews"
-                        ? application.reviews.map((review, index) => (
-                            <span key={index}>
-                              {`Stars: ${review.stars}, Review: ${review.review}, User: ${review.user}, UserID: ${review.userId}`}
-                              {index !== application.reviews.length - 1 && (
-                                <br />
-                              )}
-                            </span>
-                          ))
-                        : application[column.id]}
+                      {section[column.id]}
                     </TableCell>
                   ))}
                 </TableRow>

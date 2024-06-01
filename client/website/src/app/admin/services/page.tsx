@@ -1,19 +1,9 @@
-import AdminSidenavV2 from "@/components/adminPage/AdminSidenavV2";
-import ServicesTable from "@/components/adminPage/ServicesTable";
-import AdminContainer from "@/containers/AdminContainer";
-import React from "react";
+import AdminServices from "@/components/pages/AdminServices";
 import type { Metadata } from "next";
 
 export const metadata = { title: `Admin | Services` } satisfies Metadata;
 const index = () => {
-  return (
-    <AdminContainer>
-      <div style={{ display: "flex" }}>
-        <AdminSidenavV2 activePage="services" />
-        <ServicesTable />
-      </div>
-    </AdminContainer>
-  );
+  return <AdminServices />;
 };
 
 export default index;
