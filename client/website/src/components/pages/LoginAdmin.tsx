@@ -21,12 +21,20 @@ const LoginAdmin = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("/api/admin/login", {
-        email,
-        password,
-      });
+      console.log(email);
+      console.log(password);
+      const response = await axios.post(
+        "http://localhost:4000/api/admin/login",
+        {
+          email,
+          password,
+        }
+      );
+      console.log(response);
       if (response.data) {
-        Cookies.set("adminSession", response.data, { expires: 7 });
+        Cookies.set("adminSession", JSON.stringify(response.data), {
+          expires: 7,
+        });
         router.push("/admin");
       }
     } catch (err) {

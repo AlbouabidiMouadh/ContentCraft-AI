@@ -5,7 +5,7 @@ const axios = require("axios");
 const CLIENT_ID =
   "92323205378-cel2q3givgo3k83nsbirjvsrec1ge9th.apps.googleusercontent.com";
 const CLIENT_SECRET = "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";
-const REDIRECT_URI = "<http://localhost:3000/api/auth/google/callback>";
+const REDIRECT_URI = "<http://localhost:4000/api/auth/google/callback>";
 
 // Initiates the Google Login flow
 router.get("/auth/google", (req, res) => {

@@ -7,6 +7,8 @@ import { Button } from "@nextui-org/button";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const ProfileSecurity = () => {
   const router = useRouter();
@@ -14,6 +16,11 @@ const ProfileSecurity = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [session, setSession] = useState<any>(null);
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success", // or "error"
+  });
 
   useEffect(() => {
     const sessionData = Cookies.get("session");
@@ -26,7 +33,11 @@ const ProfileSecurity = () => {
 
   const handlePasswordChange = async () => {
     if (newPassword !== confirmPassword) {
-      alert("New password and confirmation do not match");
+      setNotification({
+        open: true,
+        message: "New password and confirmation do not match",
+        severity: "error",
+      });
       return;
     }
 
@@ -43,11 +54,23 @@ const ProfileSecurity = () => {
           },
         }
       );
-      alert("Password successfully changed");
+      setNotification({
+        open: true,
+        message: "Password successfully changed",
+        severity: "success",
+      });
     } catch (error) {
       console.log(error);
-      alert("Error changing password");
+      setNotification({
+        open: true,
+        message: "Error changing password",
+        severity: "error",
+      });
     }
+  };
+
+  const handleCloseNotification = () => {
+    setNotification({ ...notification, open: false });
   };
 
   if (!session) {
@@ -116,6 +139,19 @@ const ProfileSecurity = () => {
           </div>
         </div>
       </div>
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={6000}
+        onClose={handleCloseNotification}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseNotification}
+        >
+          {notification.message}
+        </MuiAlert>
+      </Snackbar>
     </ProfileContainer>
   );
 };

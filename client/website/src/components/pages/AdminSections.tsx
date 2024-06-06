@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import AdminSidenavV2 from "@/components/adminPage/AdminSidenavV2";
 import AdminContainer from "@/containers/AdminContainer";
 import SectionsTable from "../adminPage/SectionsTable";
+import CircularProgress from '@mui/material/CircularProgress'; // Import CircularProgress component
 
 const AdminSections = () => {
   const router = useRouter();
@@ -14,7 +15,7 @@ const AdminSections = () => {
     const checkAdminSession = () => {
       const adminSession = Cookies.get("adminSession");
       if (!adminSession) {
-        router.push("/auth/login");
+        router.push("/auth/admin/login");
       } else {
         setIsAuthenticated(true);
       }
@@ -29,13 +30,18 @@ const AdminSections = () => {
   };
 
   if (!isAuthenticated) {
-    return <div>Loading...</div>;
+    // Render CircularProgress while loading
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (
     <AdminContainer>
       <div style={{ display: "flex" }}>
-        <AdminSidenavV2 activePage="services" handleLogOut={handleLogOut} />
+        <AdminSidenavV2 activePage="sections" handleLogOut={handleLogOut} />
         <SectionsTable />
       </div>
     </AdminContainer>

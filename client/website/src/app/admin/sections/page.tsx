@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import type { Metadata } from "next";
+import AdminSections from "@/components/pages/AdminSections";
+
+export const metadata = { title: `Admin | Sections` } satisfies Metadata;
 
 const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+  return <AdminSections />;
+};
 
-export default page
+export default page;

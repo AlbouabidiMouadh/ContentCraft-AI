@@ -1,5 +1,7 @@
-"use client"
+"use client";
 import * as React from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,80 +10,66 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
 
+// Define column interface
 interface Column {
-  id: "name" | "code" | "population" | "size" | "density";
+  id: "firstname" | "lastname" | "email" | "subscription";
   label: string;
   minWidth?: number;
   align?: "right";
-  format?: (value: number) => string;
+}
+
+// Define user interface
+interface User {
+  _id?: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  subscription: string;
 }
 
 const columns: readonly Column[] = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
-  {
-    id: "population",
-    label: "Population",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "size",
-    label: "Size\u00a0(km\u00b2)",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "density",
-    label: "Density",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toFixed(2),
-  },
-];
-
-interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
-}
-
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number
-): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
-const rows = [
-  createData("India", "IN", 1324171354, 3287263),
-  createData("China", "CN", 1403500365, 9596961),
-  createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520),
-  createData("Canada", "CA", 37602103, 9984670),
-  createData("Australia", "AU", 25475400, 7692024),
-  createData("Germany", "DE", 83019200, 357578),
-  createData("Ireland", "IE", 4857000, 70273),
-  createData("Mexico", "MX", 126577691, 1972550),
-  createData("Japan", "JP", 126317000, 377973),
-  createData("France", "FR", 67022000, 640679),
-  createData("United Kingdom", "GB", 67545757, 242495),
-  createData("Russia", "RU", 146793744, 17098246),
-  createData("Nigeria", "NG", 200962417, 923768),
-  createData("Brazil", "BR", 210147125, 8515767),
+  { id: "firstname", label: "First Name", minWidth: 170 },
+  { id: "lastname", label: "Last Name", minWidth: 170 },
+  { id: "email", label: "Email", minWidth: 200 },
+  { id: "subscription", label: "Subscription", minWidth: 170 },
 ];
 
 export default function UsersTable() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(30);
+  const [page, setPage] = React.useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState<number>(30);
+  const [rows, setRows] = React.useState<User[]>([]);
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [editUser, setEditUser] = React.useState<User | null>(null);
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const session = Cookies.get("adminSession");
+      if (!session) return;
+      console.log(session)
+      const token = JSON.parse(session).token;
+
+      const response = await axios.get<User[]>("http://localhost:4000/api/user/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response)
+      setRows(response.data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -94,8 +82,70 @@ export default function UsersTable() {
     setPage(0);
   };
 
+  const handleClickOpen = (user: User | null = null) => {
+    setEditUser(user);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setEditUser(null);
+  };
+
+  const handleSave = async () => {
+    try {
+      const session = Cookies.get("adminSession");
+      if (!session) return;
+
+      const token = JSON.parse(session).token;
+
+      if (editUser?._id) {
+        await axios.put(`http://localhost:4000/api/users/${editUser._id}`, editUser, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } else {
+        await axios.post("/api/users", editUser, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+      fetchData();
+      handleClose();
+    } catch (error) {
+      console.error("Error saving user:", error);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const session = Cookies.get("adminSession");
+      if (!session) return;
+
+      const token = JSON.parse(session).token;
+
+      await axios.delete(`http://localhost:4000/api/user/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden",  }}>
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => handleClickOpen(null)}
+      >
+        Add User
+      </Button>
       <TableContainer>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -103,33 +153,45 @@ export default function UsersTable() {
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>
               ))}
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+              .map((row) => (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {value}
+                      </TableCell>
+                    );
+                  })}
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleClickOpen(row)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDelete(row._id!)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -142,6 +204,64 @@ export default function UsersTable() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{editUser?._id ? "Edit User" : "Add User"}</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="firstname"
+            label="First Name"
+            type="text"
+            fullWidth
+            value={editUser?.firstname || ""}
+            onChange={(e) =>
+              setEditUser({ ...editUser, firstname: e.target.value } as User)
+            }
+          />
+          <TextField
+            margin="dense"
+            id="lastname"
+            label="Last Name"
+            type="text"
+            fullWidth
+            value={editUser?.lastname || ""}
+            onChange={(e) =>
+              setEditUser({ ...editUser, lastname: e.target.value } as User)
+            }
+          />
+          <TextField
+            margin="dense"
+            id="email"
+            label="Email"
+            type="email"
+            fullWidth
+            value={editUser?.email || ""}
+            onChange={(e) =>
+              setEditUser({ ...editUser, email: e.target.value } as User)
+            }
+          />
+          <TextField
+            margin="dense"
+            id="subscription"
+            label="Subscription"
+            type="text"
+            fullWidth
+            value={editUser?.subscription || ""}
+            onChange={(e) =>
+              setEditUser({ ...editUser, subscription: e.target.value } as User)
+            }
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSave} color="primary">
+            {editUser?._id ? "Save" : "Add"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Paper>
   );
 }

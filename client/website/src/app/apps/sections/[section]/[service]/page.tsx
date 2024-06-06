@@ -1,42 +1,44 @@
 "use client";
 import MainContainer from "@/containers/MainContainer";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@nextui-org/button";
 import audioServiceImage from "@/public/illustrations/Char 12.png";
-import { ServiceType, ReviewType } from "@/types/service";
+import { ServiceType } from "@/types/service";
+import { useParams } from "next/navigation";
 
-const dummyService: ServiceType = {
-  id: "1",
-  name: "Audio Noise Reducer",
-  description: "Reduce noise from your audio files efficiently.",
-  picture: "https://picsum.photos/seed/picsum/200/300",
-  inputType: "audio",
-  outputType: "audio",
-  url: "/api/audio-noise-reducer",
-  features: [
-    "Reduces background noise",
-    "Enhances audio clarity",
-    "Supports various audio formats",
-    "Fast and efficient processing",
-  ],
-  reviews: [
-    { user: "John Doe", review: "Great service!", stars: 5, userId: "123" },
-    { user: "Jane Smith", review: "Really helped with my recordings.", stars: 4, userId: "124" },
-  ],
-  sectionId: "1",
-  sectionName: "Audio Tools",
-  pack: "Basic",
-};
-
-const AudioPage = ({ params }: { params: { slug: string } }) => {
-  const [service] = useState<ServiceType>(dummyService);
+const AudioPage = () => {
+  const [service, setService] = useState<ServiceType | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [text, setText] = useState<string>("");
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const params = useParams<{ service: string; section: string }>();
+
+  useEffect(() => {
+    const fetchServiceData = async () => {
+      try {
+        // Fetch service data
+        const serviceResponse = await axios.get(
+          `http://localhost:4000/api/applicationByName/${params.service}`
+        );
+        const serviceData = serviceResponse.data;
+        console.log(serviceData);
+        // Update state with fetched data
+        setService(serviceData[0]);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchServiceData();
+  }, [params.slug]);
 
   const handleService = async () => {
+    if (!service) return;
     if (!file && !text) return;
 
     const form = new FormData();
@@ -47,7 +49,7 @@ const AudioPage = ({ params }: { params: { slug: string } }) => {
     }
 
     try {
-      const response = await axios.post(service.url, form, {
+      const response = await axios.post(`http://localhost:5000${service.url}`, form, {
         responseType: "blob",
       });
 
@@ -59,6 +61,8 @@ const AudioPage = ({ params }: { params: { slug: string } }) => {
   };
 
   const renderInput = () => {
+    if (!service) return null;
+
     switch (service.inputType) {
       case "text":
         return (
@@ -137,7 +141,7 @@ const AudioPage = ({ params }: { params: { slug: string } }) => {
   const renderOutput = () => {
     if (!downloadUrl) return null;
 
-    switch (service.outputType) {
+    switch (service?.outputType) {
       case "audio":
         return (
           <audio controls style={{ width: "100%", marginTop: "20px" }}>
@@ -184,6 +188,14 @@ const AudioPage = ({ params }: { params: { slug: string } }) => {
     }
   };
 
+  if (loading) {
+    return <div>Loading...</div>; // You can replace this with a spinner if you have one
+  }
+
+  if (!service) {
+    return <div>No data available</div>;
+  }
+
   return (
     <MainContainer>
       <div style={{ margin: "0 10%", padding: "20px 0" }}>
@@ -196,45 +208,72 @@ const AudioPage = ({ params }: { params: { slug: string } }) => {
           }}
         >
           <div style={{ textAlign: "center" }}>
-            <h1 style={{ fontSize: "32px", margin: "20px 0" }}>{service.name}</h1>
-            <p style={{ fontSize: "18px", marginBottom: "20px" }}>{service.description}</p>
+            <h1 style={{ fontSize: "32px", margin: "20px 0" }}>
+              {service.name}
+            </h1>
+            <p style={{ fontSize: "18px", marginBottom: "20px" }}>
+              {service.description}
+            </p>
           </div>
         </div>
-          <div style={{ textAlign: "center", marginBottom: "20px", justifySelf: "center" }}>
-            <Image
-              src={service.picture}
-              alt={service.name}
-              width={300}
-              height={300}
-              style={{ borderRadius: "10px", margin: "auto" }}
-            />
-          </div>
-        <div style={{ marginBottom: "50px", textAlign: "center" }}>
-          <h2 style={{ fontSize: "28px", marginBottom: "20px" }}>Application Features</h2>
-          <ul
-            style={{
-              listStyleType: "disc",
-              paddingLeft: "20px",
-              textAlign: "left",
-              maxWidth: "600px",
-              margin: "0 auto",
-              fontSize: "18px",
-            }}
-          >
-            {service.features.map((feature, index) => (
-              <li key={index} style={{ marginBottom: "10px" }}>{feature}</li>
-            ))}
-          </ul>
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+            justifySelf: "center",
+          }}
+        >
+          <Image
+            src={audioServiceImage.src}
+            alt={service.name}
+            width={300}
+            height={300}
+            style={{ borderRadius: "10px", margin: "auto" }}
+          />
         </div>
+        {service.features && (
+          <div style={{ marginBottom: "50px", textAlign: "center" }}>
+            <h2 style={{ fontSize: "28px", marginBottom: "20px" }}>
+              Application Features
+            </h2>
+            <ul
+              style={{
+                listStyleType: "disc",
+                paddingLeft: "20px",
+                textAlign: "left",
+                maxWidth: "600px",
+                margin: "0 auto",
+                fontSize: "18px",
+              }}
+            >
+              {service.features.map((feature, index) => (
+                <li key={index} style={{ marginBottom: "10px" }}>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div style={{ marginBottom: "50px", textAlign: "center" }}>
-          <h2 style={{ fontSize: "28px", marginBottom: "20px" }}>Upload and Process</h2>
+          <h2 style={{ fontSize: "28px", marginBottom: "20px" }}>
+            Upload and Process
+          </h2>
           <div style={{ width: "100%", maxWidth: "700px", margin: "auto" }}>
             {renderInput()}
-            <Button onClick={handleService} color="primary" style={{ marginRight: "10px" }}>
+            <Button
+              onClick={handleService}
+              color="primary"
+              style={{ marginRight: "10px" }}
+            >
               Process
             </Button>
             {downloadUrl && (
-              <Button as="a" href={downloadUrl} download="output" color="secondary">
+              <Button
+                as="a"
+                href={downloadUrl}
+                download="output"
+                color="secondary"
+              >
                 Download Output
               </Button>
             )}
@@ -242,8 +281,12 @@ const AudioPage = ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
         <div style={{ marginBottom: "50px", textAlign: "center" }}>
-          <h2 style={{ fontSize: "28px", marginBottom: "20px" }}>User Reviews</h2>
-          <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "left" }}>
+          <h2 style={{ fontSize: "28px", marginBottom: "20px" }}>
+            User Reviews
+          </h2>
+          <div
+            style={{ maxWidth: "600px", margin: "0 auto", textAlign: "left" }}
+          >
             {service.reviews && service.reviews.length > 0 ? (
               service.reviews.map((review, index) => (
                 <div
@@ -254,7 +297,9 @@ const AudioPage = ({ params }: { params: { slug: string } }) => {
                     marginBottom: "10px",
                   }}
                 >
-                  <p style={{ margin: "0" }}><strong>{review.user}</strong></p>
+                  <p style={{ margin: "0" }}>
+                    <strong>{review.user}</strong>
+                  </p>
                   <p style={{ margin: "5px 0" }}>{review.review}</p>
                   <p style={{ margin: "0", color: "#FFD700" }}>
                     {"★".repeat(review.stars)}

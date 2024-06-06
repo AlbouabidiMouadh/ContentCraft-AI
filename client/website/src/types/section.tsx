@@ -3,7 +3,6 @@ export type SectionType = {
   name: string;
   description: string;
   picture: string;
-  reviews: [{ likes: number; review: string }];
   url: string;
   appsIds: string[];
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import FreeCard from "./FreeCard";
 import { Button } from "@nextui-org/button";
+import Link from "next/link";
 
 const apps = [
   "item",
@@ -47,7 +48,7 @@ const FreeSection = () => {
             margin: "auto",
           }}
         >
-          Browse All
+          <Link href={"/apps"}>Browse All</Link>
         </Button>
       </div>
     </div>

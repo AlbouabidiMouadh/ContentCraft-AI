@@ -37,6 +37,19 @@ exports.getSectionById = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+// Controller method to get a section by name
+exports.getSectionByName = async (req, res) => {
+  try {
+    const section = await Section.find({ name: req.params.name });
+    if (!section) {
+      return res.status(404).json({ message: "Section not found" });
+    }
+    res.status(200).json(section[0]);
+  } catch (error) {
+    console.error("Error getting section by ID:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 // Controller method to update a section by ID
 exports.updateSectionById = async (req, res) => {

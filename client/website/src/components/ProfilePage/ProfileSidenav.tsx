@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const data = [
-  { link: "/profile/general", label: "General", icon: IconSettings },
+  { link: "/profile", label: "General", icon: IconSettings },
   { link: "/profile/security", label: "Security", icon: IconFingerprint },
   { link: "/profile/subscription", label: "Subscription", icon: IconKey },
 ];

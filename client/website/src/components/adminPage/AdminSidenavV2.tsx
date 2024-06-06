@@ -7,27 +7,31 @@ import {
   IconLogout,
   IconSettings,
 } from "@tabler/icons-react";
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 type ActivePageType =
   | "users"
-  | "profile"
+  // | "profile"
   | "dashboard"
   | "services"
   | "subscriptions"
-  | "packs";
+  | "packs"
+  | "sections"
+  | "payments";
 
 const data = [
   { link: "/admin", label: "Dashboard", icon: IconLayoutBoard },
-  { link: "/admin/profile", label: "Profile", icon: IconSettings },
+  // { link: "/admin/profile", label: "Profile", icon: IconSettings },
   { link: "/admin/users", label: "Users", icon: IconBrandDatabricks },
   { link: "/admin/services", label: "Services", icon: IconBrandDatabricks },
+  { link: "/admin/payments", label: "Payments", icon: IconBrandDatabricks },
+  { link: "/admin/packs", label: "Packs", icon: IconBrandDatabricks },
+  { link: "/admin/sections", label: "Sections", icon: IconBrandDatabricks },
   {
     link: "/admin/subscriptions",
     label: "Subscriptions",
     icon: IconBrandDatabricks,
   },
-  { link: "/admin/packs", label: "Packs", icon: IconBrandDatabricks },
 ];
 
 const AdminSidenavV2 = ({
@@ -37,6 +41,12 @@ const AdminSidenavV2 = ({
   activePage: ActivePageType;
   handleLogOut: () => void;
 }) => {
+  const [username, setusername] = useState<string>("");
+  useEffect(() => {
+    const session = Cookies.get("adminSession");
+    if (!session) return;
+    setusername(JSON.parse(session).user.name);
+  }, []);
   const navbarStyle: React.CSSProperties = {
     height: "100vh",
     width: "250px",
@@ -83,7 +93,7 @@ const AdminSidenavV2 = ({
   };
 
   const links = data.map((item) => (
-    <Link key={item.label} href={item.link} passHref>
+    <Link key={item.label} href={item.link} passHref legacyBehavior>
       <a
         style={{
           ...linkStyle,
@@ -100,7 +110,7 @@ const AdminSidenavV2 = ({
     <nav style={navbarStyle}>
       <Group style={headerStyle}>
         <Code fw={700} style={{ fontSize: "24px" }}>
-          Admin Panel
+          {username}
         </Code>
       </Group>
       {links}

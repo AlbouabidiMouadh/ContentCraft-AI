@@ -18,7 +18,7 @@ const AdminProfile = () => {
     const checkAdminSession = () => {
       const adminSession = Cookies.get("adminSession");
       if (!adminSession) {
-        router.push("/auth/login");
+        router.push("/auth/admin/login");
       } else {
         setIsAuthenticated(true);
       }
@@ -29,7 +29,7 @@ const AdminProfile = () => {
 
   const handleLogOut = () => {
     Cookies.remove("adminSession");
-    router.push("/auth/login");
+    router.push("/auth/admin/login");
   };
 
   if (!isAuthenticated) {
@@ -40,7 +40,7 @@ const AdminProfile = () => {
     <AdminContainer>
       <div style={{ display: "flex" }}>
         <div style={{ width: "200px" }}>
-          <AdminSidenavV2 activePage="profile" handleLogOut={handleLogOut} />
+          {/* <AdminSidenavV2 activePage="profile" handleLogOut={handleLogOut} /> */}
         </div>
         <div>
           <Stack spacing={3}>

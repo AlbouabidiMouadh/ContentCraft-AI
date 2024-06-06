@@ -35,9 +35,13 @@ const ContactUs = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(form.values)
     try {
       console.log(form.values);
-      const response = await axios.post("/api/contact", form.values);
+      const response = await axios.post(
+        "http://localhost:4000/api/contact",
+        form.values
+      );
       setSubmissionStatus({ type: "success", message: response.data.message });
       form.reset();
     } catch (error) {

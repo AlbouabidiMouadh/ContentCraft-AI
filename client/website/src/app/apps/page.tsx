@@ -14,9 +14,9 @@ const Apps = () => {
     const fetchSections = async () => {
       try {
         // Replace this with your actual API endpoint to fetch sections
-        const response = await fetch("/api/sections");
+        const response = await fetch("http://localhost:4000/api/section");
         const data = await response.json();
-        setSections(data.sections);
+        setSections(data);
       } catch (error) {
         console.error("Error fetching sections:", error);
       }

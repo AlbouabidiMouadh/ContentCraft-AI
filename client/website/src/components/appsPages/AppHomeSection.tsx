@@ -12,13 +12,10 @@ const AppHomeSection = ({
   const [appsList, setAppsList] = useState<ServiceType[]>([]);
 
   useEffect(() => {
-    // Function to fetch apps from an API or some data source
     const fetchApps = async () => {
-      // Replace with your API endpoint or data fetching logic
-      const response = await fetch(`/api/apps/${section.url}`);
+      const response = await fetch(`http://localhost:4000/api/apps/${section.url}`);
       const data = await response.json();
 
-      // Assuming the data is in the format you need
       setAppsList(data);
     };
 
@@ -56,7 +53,7 @@ const AppHomeSection = ({
               textAlign: "center",
             }}
           >
-            <Link href={`/apps/${section.url}`} legacyBehavior>
+            <Link href={`/apps/sections/${section.name}`} legacyBehavior>
               <a
                 style={{
                   fontSize: "18px",

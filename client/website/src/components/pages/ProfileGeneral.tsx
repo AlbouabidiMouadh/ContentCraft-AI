@@ -1,14 +1,16 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import ProfileSidenav from "@/components/ProfilePage/ProfileSidenav";
 import ProfileContainer from "@/containers/ProfileContainer";
 import Image from "next/image";
 import picture from "@/public/illustrations/Enjoy your finance.png";
 import { TextField } from "@mui/material";
 import { Button } from "@nextui-org/button";
-import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const ProfileGeneral = () => {
   const router = useRouter();
@@ -16,16 +18,25 @@ const ProfileGeneral = () => {
     email: string;
     lastname: string;
     firstname: string;
+    picture?: string;
   };
 
   const [data, setData] = useState<UserData>({
     email: "",
     lastname: "",
     firstname: "",
+    picture: "",
   });
   const [session, setSession] = useState<any>(null);
-
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success", // or "error"
+  });
+  const [isSelected, setIsSelected] = useState<boolean>(false)
   const fetchData = async (session: any) => {
+    console.log(session.user.id);
     try {
       const response = await axios.get(
         `http://localhost:4000/api/user/${session.user.id}`,
@@ -35,6 +46,7 @@ const ProfileGeneral = () => {
           },
         }
       );
+      console.log(response);
       setData(response.data);
     } catch (error) {
       console.log(error);
@@ -52,14 +64,65 @@ const ProfileGeneral = () => {
     }
   }, [router]);
 
+  const handleCloseNotification = () => {
+    setNotification({ ...notification, open: false });
+  };
+
   const handleUpdate = async () => {
     try {
-      await axios.put(
+      console.log("session" + session.token);
+      const response = await axios.put(
         `http://localhost:4000/api/user/${session.user.id}`,
-        data,
+        { newUser: data },
         {
           headers: {
             Authorization: `Bearer ${session.token}`,
+          },
+        }
+      );
+      console.log(response);
+      setNotification({
+        open: true,
+        message: "Profile successfully updated",
+        severity: "success",
+      });
+      if (selectedImage) {
+        await uploadImage();
+      }
+    } catch (error) {
+      console.log(error);
+      setNotification({
+        open: true,
+        message: "Error updating profile",
+        severity: "error",
+      });
+    }
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImage(e.target.files[0]);
+      setData({
+        ...data,
+        picture: e.target.files[0].name,
+      });
+      setIsSelected(true)
+      console.log(e.target.files[0].name);
+    }
+  };
+
+  const uploadImage = async () => {
+    const formData = new FormData();
+    formData.append("file", selectedImage!);
+    console.log("session" + session.token);
+    try {
+      await axios.post(
+        `http://localhost:4000/api/upload/profile-picture`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${session.token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -91,12 +154,31 @@ const ProfileGeneral = () => {
               alignItems: "center",
             }}
           >
-            <Image
-              src={picture.src}
-              alt="profile-picture"
-              height={250}
-              width={250}
-              style={{ width: "300px", margin: "20px 0" }}
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                margin: "20px 0",
+                position: "relative",
+              }}
+            >
+              <Image
+                src={
+                  selectedImage
+                    ? URL.createObjectURL(selectedImage)
+                    : `http://localhost:4000/profile/${data.picture}`
+                }
+                alt="profile-picture"
+                layout="fill"
+                objectFit="cover"
+                style={{ borderRadius: "50%" }}
+              />
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ margin: "20px 0" }}
             />
             <TextField
               type="text"
@@ -136,6 +218,19 @@ const ProfileGeneral = () => {
           </div>
         </div>
       </div>
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={6000}
+        onClose={handleCloseNotification}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseNotification}
+        >
+          {notification.message}
+        </MuiAlert>
+      </Snackbar>
     </ProfileContainer>
   );
 };

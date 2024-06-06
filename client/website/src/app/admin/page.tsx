@@ -1,6 +1,6 @@
 import * as React from "react";
-import type { Metadata } from "next";
 import AdminDashboard from "@/components/pages/AdminDashboard";
+import type { Metadata } from "next";
 
 export const metadata = { title: `Admin | Dashboard` } satisfies Metadata;
 

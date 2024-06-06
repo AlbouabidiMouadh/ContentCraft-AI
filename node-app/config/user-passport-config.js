@@ -1,38 +1,23 @@
-// user-passport-config.js
-const passport = require('passport');
-const { Strategy: LocalStrategy } = require('passport-local');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
 
-passport.use('user-local', new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-}, async (email, password, done) => {
-    try {
-        const user = await User.findOne({ email });
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.USER_PRIVATE_KEY; // Use the environment variable
 
-        if (!user) {
-            return done(null, false, { message: 'Incorrect email.' });
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-
-        if (!isMatch) {
-            return done(null, false, { message: 'Incorrect password.' });
-        }
-
-        return done(null, user);
-    } catch (err) {
-        return done(err);
-    }
-}));
-
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-        done(err, user);
-    });
-});
+module.exports = (passport) => {
+  passport.use(
+    'jwt-user',
+    new JwtStrategy(opts, (jwt_payload, done) => {
+      User.findById(jwt_payload.id)
+        .then((user) => {
+          if (user) {
+            return done(null, user);
+          }
+          return done(null, false);
+        })
+        .catch((err) => console.log(err));
+    })
+  );
+};

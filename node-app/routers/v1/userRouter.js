@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../../controllers/usersController");
+const passport = require("passport");
 
-router.post("/user/:id", userController.addController);
-router.get("/user/:id", userController.getOneController);
-router.get("/user/all", userController.getAllController);
-router.delete("/user/:id", userController.removeController);
-router.put("/user/:id", userController.updateController);
-router.post("/login", userController.signinController);
-router.post("/signup", userController.signupController);
-router.post("/recover", userController.recoverController);
+// Middleware to protect routes
+const isAuthenticated = passport.authenticate('jwt-user', { session: false });
+
+router.delete("/user/:id", isAuthenticated, userController.removeController);
+router.get("/user/:id", isAuthenticated, userController.getOneController);
+router.put("/user/:id", isAuthenticated, userController.updateController);
+router.put("/user/:id/password", isAuthenticated, userController.changePasswordController);
 
 module.exports = router;

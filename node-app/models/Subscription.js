@@ -5,8 +5,8 @@ const subscriptionSchema = new Schema({
   type: String,
   price: Number,
   users: Number,
-  description: String,
-  features: [String],
+  startDate: Date,
+  endDate : Date,
 });
 
 module.exports = model("Subscription", subscriptionSchema);

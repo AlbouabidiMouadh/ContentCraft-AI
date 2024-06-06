@@ -1,26 +1,11 @@
-"use client";
-import ProfileContainer from "@/containers/ProfileContainer";
-import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
-
+import ProfileGeneral from "@/components/pages/ProfileGeneral";
+import React from "react";
+import { Metadata } from "next";
+export const metadata = {
+  title: `Profile | General`,
+} satisfies Metadata;
 const page = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = Cookies.get("session");
-    if (!token) {
-      router.push("/auth/user/login");
-    } else {
-      router.push("/profile/general");
-    }
-  });
-
-  return (
-    <ProfileContainer>
-      <div>{/* redirecting page for profile route */}</div>
-    </ProfileContainer>
-  );
+  return <ProfileGeneral />;
 };
 
 export default page;

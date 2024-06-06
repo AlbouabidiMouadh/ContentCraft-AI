@@ -1,7 +1,7 @@
 import MainContainer from "@/containers/MainContainer";
 import React from "react";
 import type { Metadata } from "next";
-import picture from "@/public/illustrations/Char 01.png";
+import picture from "@/public/illustrations/3d-flame-office-worker-with-briefcase.png";
 import { Image } from "@nextui-org/react";
 
 export const metadata = { title: `ContentCraft AI | About` } satisfies Metadata;
@@ -21,26 +21,58 @@ const About = () => {
           </p>
         </div>
         <div style={{ marginTop: "80px" }}>
-          <h2 style={{ fontSize: "2rem", marginBottom: "30px", textAlign: "center" }}>Our Team</h2>
+          <h2
+            style={{
+              fontSize: "2rem",
+              marginBottom: "30px",
+              textAlign: "center",
+            }}
+          >
+            Our Team
+          </h2>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            {/* Example team members */}
             <div style={{ margin: "0 20px", textAlign: "center" }}>
               <Image
                 src={picture.src}
                 alt="Team Member 1"
                 width={200}
                 height={200}
-                style={{ borderRadius: "50%", marginBottom: "20px" }}
+                style={{
+                  // borderRadius: "50%",
+                  marginBottom: "20px",
+                  marginLeft: "20px",
+                }}
               />
-              <p style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: "5px" }}>Albouabidi Mouadh</p>
+              <p
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Albouabidi Mouadh
+              </p>
               <p style={{ fontSize: "1rem" }}>FOUNDER</p>
             </div>
-            {/* Add more team members here */}
           </div>
         </div>
         <div style={{ marginTop: "100px", marginBottom: "100px" }}>
-          <h2 style={{ fontSize: "2rem", marginBottom: "30px", textAlign: "center" }}>Our Mission</h2>
-          <p style={{ fontSize: "1.2rem", lineHeight: "1.6", textAlign: "center" }}>
+          <h2
+            style={{
+              fontSize: "2rem",
+              marginBottom: "30px",
+              textAlign: "center",
+            }}
+          >
+            Our Mission
+          </h2>
+          <p
+            style={{
+              fontSize: "1.2rem",
+              lineHeight: "1.6",
+              textAlign: "center",
+            }}
+          >
             Our mission is to revolutionize content creation by harnessing the
             power of artificial intelligence. We aim to provide content creators
             and bloggers with AI-driven solutions that streamline workflows,

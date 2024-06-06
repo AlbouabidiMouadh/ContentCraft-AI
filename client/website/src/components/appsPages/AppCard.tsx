@@ -3,6 +3,7 @@ import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import picture from "@/public/illustrations/Char 07.png"
 
 const AppCard = ({ app }: { app: ServiceType }) => {
   return (
@@ -22,7 +23,7 @@ const AppCard = ({ app }: { app: ServiceType }) => {
     >
       <div style={{ marginRight: "20px", flex: "1" }}>
         <Image
-          src={app.picture}
+          src={picture.src}
           height={250}
           width={250}
           alt={`${app.name}-image`}
@@ -37,7 +38,7 @@ const AppCard = ({ app }: { app: ServiceType }) => {
           <p style={{ fontSize: "16px", color: "#6B7280", marginBottom: "20px" }}>
             {app.description}
           </p>
-          <Link href={`/apps/${app.sectionName}/${app.url}`} passHref>
+          <Link href={`/apps/sections/${app.sectionName}/${app.name}`} passHref>
             <Button color="primary" variant="solid" size="lg">
               Explore
             </Button>

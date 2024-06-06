@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import picture from "@/public/illustrations/Char 05.png";
+import picture1 from "@/public/illustrations/Cool Kids - Brainstorming.png";
+import picture2 from "@/public/illustrations/Cool Kids - Brainstorming (1).png";
+import picture3 from "@/public/illustrations/Cool Kids - Brainstorming (2).png";
 
 const QualitySection = () => {
   const sections = [
@@ -19,14 +21,17 @@ const QualitySection = () => {
     {
       title: "AI Services",
       text: "Streamline your content creation with our AI-powered tools.",
+      picture: picture3.src,
     },
     {
       title: "Quality & Speed",
       text: "Achieve high-quality results quickly with our AI technology.",
+      picture: picture2.src,
     },
     {
       title: "Upcoming Features",
       text: "Stay tuned for new features and updates.",
+      picture: picture1.src,
     },
   ];
 
@@ -35,7 +40,12 @@ const QualitySection = () => {
       <div style={styles.content}>
         {sections.map((section, index) => (
           <div key={index} style={styles.item}>
-            <Image src={picture} height={250} width={250} alt={`Illustration ${index + 1}`} />
+            <Image
+              src={section.picture}
+              height={250}
+              width={250}
+              alt={`Illustration ${index + 1}`}
+            />
             <div style={styles.text}>
               <h3 style={styles.title}>{section.title}</h3>
               <p>{section.text}</p>

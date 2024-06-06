@@ -1,10 +1,11 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import AdminSidenavV2 from "@/components/adminPage/AdminSidenavV2";
 import UsersTable from "@/components/adminPage/UsersTable";
 import AdminContainer from "@/containers/AdminContainer";
+import CircularProgress from "@mui/material/CircularProgress"; // Import CircularProgress component
 
 const AdminUsers = () => {
   const router = useRouter();
@@ -14,7 +15,7 @@ const AdminUsers = () => {
     const checkAdminSession = () => {
       const adminSession = Cookies.get("adminSession");
       if (!adminSession) {
-        router.push("/auth/login");
+        router.push("/auth/admin/login");
       } else {
         setIsAuthenticated(true);
       }
@@ -25,11 +26,16 @@ const AdminUsers = () => {
 
   const handleLogOut = () => {
     Cookies.remove("adminSession");
-    router.push("/auth/login");
+    router.push("/auth/admin/login");
   };
 
   if (!isAuthenticated) {
-    return <div>Loading...</div>;
+    // Render CircularProgress while loading
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (

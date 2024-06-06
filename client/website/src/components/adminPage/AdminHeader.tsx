@@ -8,7 +8,7 @@ const AdminHeader = () => {
     <div
       style={{
         color: "white",
-        backgroundColor: "#1a1a1a",
+        backgroundColor: "black",
         fontSize: "18px",
         display: "flex",
         flexDirection: "row",

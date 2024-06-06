@@ -7,13 +7,23 @@ const passport = require("passport");
 require("../../config/user-passport-config");
 
 // Middleware to protect routes
-const isAuthenticated = passport.authenticate("jwt", { session: false });
+const isAuthenticated = passport.authenticate("jwt-user", { session: false });
 
 // Protecting all subscription routes with passport authentication
-router.post("/subscription", isAuthenticated, subscriptionController.addController);
-router.get("/subscription/:id", isAuthenticated, subscriptionController.getOneController);
-router.get("/subscriptions", isAuthenticated, subscriptionController.getAllController);
-router.delete("/subscription/:id", isAuthenticated, subscriptionController.removeController);
-router.put("/subscription/:id", isAuthenticated, subscriptionController.updateController);
+router.post(
+  "/subscription",
+  isAuthenticated,
+  subscriptionController.addController
+);
+router.get(
+  "/subscription/:id",
+  isAuthenticated,
+  subscriptionController.getOneController
+);
+router.delete(
+  "/subscription/:id",
+  isAuthenticated,
+  subscriptionController.removeController
+);
 
 module.exports = router;

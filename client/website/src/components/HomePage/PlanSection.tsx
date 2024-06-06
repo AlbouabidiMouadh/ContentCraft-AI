@@ -24,14 +24,14 @@ const PlanSection = () => {
           color="white" // Replace with actual color value if needed
           type="Basic"
           price="Free"
-          upgradeLink="/"
+          upgradeLink="/auth/user/signup"
           promo={null}
         />
         <PlanCard
           color="black" // Replace with actual color value if needed
           type="Premium"
           price={29}
-          upgradeLink="/"
+          upgradeLink="/subscription"
           promo={null}
         />
       </div>

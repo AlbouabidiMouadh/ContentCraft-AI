@@ -2,43 +2,46 @@
 
 import React from "react";
 import colors from "@/utils/colors";
-import { 
-  IconStar, 
-  IconRocket, 
-  IconPalette, 
-  IconCamera, 
+import {
+  IconStar,
+  IconRocket,
+  IconPalette,
+  IconCamera,
   IconVideo,
   IconMusic,
   IconBook,
-  IconMessageCircle
+  IconMessageCircle,
 } from "@tabler/icons-react";
 import { Button } from "@nextui-org/button";
-
-const premiumButtonHandler = () => {
-  console.log("Premium button clicked");
-};
-
-const freeButtonHandler = () => {
-  console.log("Free button clicked");
-};
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
+  const premiumButtonHandler = () => {
+    console.log("Premium button clicked");
+    router.push("/apps/premium");
+  };
+
+  const freeButtonHandler = () => {
+    console.log("Free button clicked");
+    router.push("/apps/free");
+  };
   return (
     <div
       style={{
         marginTop: "-20px",
         backgroundColor: "black",
-        paddingTop: "20px"
+        paddingTop: "20px",
       }}
     >
       <div
-        style={{ 
-          textAlign: "center", 
-          margin: "20px 15% 5px", 
-          // padding: "10px", 
-          display: "flex", 
-          justifyContent: "center", 
-          gap: "10px" 
+        style={{
+          textAlign: "center",
+          margin: "20px 15% 5px",
+          // padding: "10px",
+          display: "flex",
+          justifyContent: "center",
+          gap: "10px",
         }}
       >
         {/* <IconStar size={20} style={{ color: "white" }} />
@@ -92,10 +95,20 @@ const Header = () => {
           paddingBottom: "30px",
         }}
       >
-        <Button size="lg" color="primary" variant="shadow" onClick={premiumButtonHandler}>
+        <Button
+          size="lg"
+          color="primary"
+          variant="shadow"
+          onClick={premiumButtonHandler}
+        >
           Premium
         </Button>
-        <Button size="lg" color="primary" variant="ghost" onClick={freeButtonHandler}>
+        <Button
+          size="lg"
+          color="primary"
+          variant="ghost"
+          onClick={freeButtonHandler}
+        >
           Free
         </Button>
       </div>

@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 import Image from "next/image";
-import picture from "@/public/illustrations/Enjoy your finance.png";
+import picture from "@/public/illustrations/florid-data-security-and-financial-data-protection.gif";
 import Color from "color";
 
 const PlanCard = (props: {
