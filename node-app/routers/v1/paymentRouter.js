@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Payment = require("../models/Payment");
 const passport = require("passport");
 const paymentController = require("../../controllers/paymentController");
 // Get all payments
